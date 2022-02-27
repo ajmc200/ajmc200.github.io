@@ -1,0 +1,43 @@
+<!-- Navbar -->
+
+<span class = "bossdiv">
+    <div class='nav-container'>
+
+        <nav class="link-flex-content">
+
+            <a (click) = 'toggle()'> <img class="menu-icon" src="../../../assets/menu-bars-white.png"> </a>
+            <!---->
+            <ul class='nav__links'>
+                <li><a routerLink="/">Home</a></li>
+                    
+                <li ><a href="#about">About</a></li>
+                    
+                <li ><a routerLink="/">Gallery</a></li>
+            </ul>
+            
+        </nav>
+
+        <div class="logo-container">
+            <a routerLink="/"> <img class='logo' src='../../../assets/logo_white_letters.png' alt='logo'> </a>
+        </div>
+
+        <div class='cta'>
+            <a href='#'>
+                <button>Contact Us</button> 
+            </a>
+        </div>
+
+    </div>
+
+    
+</span>
+
+<div [@openClose]="isOpen ? 'open' : 'closed'" class="box">
+
+    <a  routerLink="/">Home</a>
+            
+    <a  href="#about">About</a>
+            
+    <a  routerLink="/">Gallery</a>
+
+</div>
