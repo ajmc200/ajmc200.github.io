@@ -18,6 +18,11 @@ a, u {
     text-decoration: none;
 }
 
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
 /* Parent --> Child styles */
 .bossdiv {
     
@@ -47,6 +52,7 @@ ul.nav__links{
     padding: 0;
     width: auto;
     justify-content: center;
+    font-family: 'Roboto', sans-serif;
 }
 
 .logo-container{
@@ -98,15 +104,29 @@ button {
 @media screen and (max-width: 600px) {
     ul.nav__links {display: none;}
 
+    .nav-container{
+        gap: var(--gap, 0);
+        flex:1;
+    }
+
     .menu-icon {
         display: inline-block;
     }
 
     .link-flex-content{
         justify-content: left;
+        flex-basis: 30px;
     }
     .cta{
-        justify-content: right;
+        justify-content: center;
+    }
+
+    #contact-info {
+        flex-direction: column;
+    }
+
+    #number{
+        font-size: 11px;
     }
 
     .box{
@@ -116,6 +136,7 @@ button {
         align-items: center;
         z-index: 2;
         background-color: rgb(82, 160, 37);
+        font-family: 'Roboto', sans-serif;
         
         position:fixed;
         top: 56px;
@@ -137,7 +158,6 @@ button {
 }
 
 .box {
-    position: absolute;
     height: 0;
     overflow: hidden;
 }
