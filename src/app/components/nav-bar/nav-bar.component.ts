@@ -9,11 +9,11 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
     trigger('openClose', [
       state('open', style({
         height: '180px',
-        backgroundColor: '#afaeab',
+        backgroundColor: 'rgb(53, 53, 53)',
       })),
       state('closed', style({
         height: '0%',
-        backgroundColor: '#afaeab'
+        backgroundColor: 'rgb(53, 53, 53)'
       })),
       transition('open => closed', [
         animate('0.15s')

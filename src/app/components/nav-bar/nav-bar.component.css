@@ -139,13 +139,14 @@ button {
         font-family: 'Roboto', sans-serif;
         
         position:fixed;
-        top: 56px;
+        top: 60px;
         
         width: 100%;
         overflow: hidden;
     }
     .box > *{
         flex: 1;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
