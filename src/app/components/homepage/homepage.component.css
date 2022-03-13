@@ -69,6 +69,10 @@ header {
     width: 90px;
 }
 
+.swiper-pic {
+    width: 100%;
+}
+
 /* possibly re-factor */
 .bg-light {
     background-color: #eeeeee;
