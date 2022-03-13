@@ -9,7 +9,9 @@ body {
 }
 
 section {
-    padding: 3rem, 0;
+    padding: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .grid {
@@ -29,6 +31,7 @@ header {
 .pic-container {
     margin-top: 41.5px;
     margin-inline: auto;
+    padding: 0;
     max-height: 600px;
     overflow: hidden;
 }
@@ -59,7 +62,7 @@ header {
 }
 
 .inside-left {
-
+    padding-left: 1em;
 }
 
 .inside-right {
