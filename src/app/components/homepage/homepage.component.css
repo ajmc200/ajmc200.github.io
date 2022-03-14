@@ -9,18 +9,29 @@ body {
 }
 
 section {
-    padding: 3rem;
+    padding-top: 0.5rem;
+    padding-bottom: 3rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
 
 .grid {
     margin-inline: auto;
+    margin-top: 50px;
     width: min(90%, 70.5rem);
+    font-size: 1.3125rem;
 }
 
 .text-center {
     text-align: center;
+}
+
+.section-header {
+    font-weight: 500;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
 }
 
 /**/
@@ -57,16 +68,18 @@ header {
     border-radius: 4px;
 }
 
-.card > *  {
-    
-}
-
 .inside-left {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     padding-left: 1em;
 }
 
 .inside-right {
-    width: 90px;
+    width: 3.25em;
+}
+
+.swiper {
+    margin-bottom: 1rem;
 }
 
 .swiper-pic {
