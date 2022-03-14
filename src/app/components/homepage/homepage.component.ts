@@ -1,4 +1,5 @@
 import { AfterContentChecked, Component, OnInit, ViewChild } from '@angular/core';
+import Swiper, { SwiperOptions, Pagination } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 
 @Component({
@@ -9,10 +10,14 @@ import { SwiperComponent } from 'swiper/angular';
 export class HomepageComponent implements OnInit, AfterContentChecked {
   @ViewChild('swiper')swiper!: SwiperComponent;
 
+  public config: SwiperOptions = {
+    pagination: true
+  }
 
   constructor() { }
 
   ngOnInit(): void {
+    Swiper.use([Pagination])
   }
 
   ngAfterContentChecked() {
