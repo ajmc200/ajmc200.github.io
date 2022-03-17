@@ -78,6 +78,15 @@ header {
     width: 3.25em;
 }
 
+.swipers-container {
+    margin-inline: auto;
+    width: min(90%, 50.5rem);
+}
+
+.tall{
+    width: min(90%, 20.5rem);
+}
+
 .swiper {
     margin-bottom: 1rem;
 }
