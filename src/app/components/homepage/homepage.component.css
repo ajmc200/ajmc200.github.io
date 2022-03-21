@@ -35,10 +35,7 @@ hr.solid {
 }
 
 /**/
-header {
-    margin-top: 41.5px; /*60-18.5 b/c problem with box element in nav-bar component*/
-}
-
+/*60-18.5 b/c problem with box element in nav-bar component*/
 .pic-container {
     margin-top: 41.5px;
     margin-inline: auto;
@@ -55,23 +52,48 @@ header {
 
 .cards-container {
     display: flex;
-    flex-direction: column;
-    gap: var(--gap, 1rem);
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .card {
     display: flex;
-    justify-content: space-between;
+    width: 50%;
     align-items: center;
-    width: min(90%, 50.5rem);
-    margin-inline: auto;
     border-radius: 4px;
+}
+
+.card-content-container {
+    position: relative;
+}
+
+.card-pic {
+
+}
+
+.card-detail {
+    display: block;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    background: linear-gradient(90deg,rgba(0,25,50,.8) 40%,rgba(0,25,50,.2) 100%);
+}
+
+.card-label > p{
+    margin: 0%;
+    color: white;
+    font-weight:lighter;
+    line-height: 1;
 }
 
 .inside-left {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     padding-left: 1em;
+    padding-right: 1em;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .inside-right {
@@ -92,6 +114,7 @@ header {
 }
 
 .swiper-pic {
+    display: block;
     width: 100%;
 }
 
@@ -109,12 +132,7 @@ header {
 /* for small screens */
 
 @media screen and (max-width: 600px) {
-    header{
-        margin-top: 60px;
-    }
     .pic-container{
         margin-top: 60px;
-    }
-    img{
     }
 }
