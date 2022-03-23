@@ -54,21 +54,20 @@ hr.solid {
     display: flex;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
+    max-width: 48.5rem;
+    margin-inline: auto;
 }
 
 .card {
     display: flex;
     width: 50%;
     align-items: center;
+    justify-content: center;
     border-radius: 4px;
 }
 
 .card-content-container {
     position: relative;
-}
-
-.card-pic {
-
 }
 
 .card-detail {
