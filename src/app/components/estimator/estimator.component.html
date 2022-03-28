@@ -1,0 +1,15 @@
+<cdk-accordion class="example-accordion">
+    <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item">
+      <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+        Item 1
+        <span class="example-accordion-item-description">
+          Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+        </span>
+      </div>
+      <div class="example-accordion-item-body" [style.display]="accordionItem.expanded ? '' : 'none'">
+
+        <app-int-paint-estimate></app-int-paint-estimate>
+
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>

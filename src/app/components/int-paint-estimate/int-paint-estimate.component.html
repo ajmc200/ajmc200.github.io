@@ -1,0 +1,34 @@
+<button>Add Room</button>
+        <select>
+          <option value="" disabled selected>Select Account Type</option>
+          <option>Livning Room</option>
+          <option>Bedroom (Regular)</option>
+          <option>Bathroom (Master)</option>
+          <option>Entrance-Hall/Foyer</option>
+          <option>Kitchen</option>
+          <option>Dinning Room</option>
+          <option>Closets</option>
+          <option>Other...</option>
+        </select>
+        <div class="swipers-container">
+          <swiper #swiper class='swiper' [config]="config">
+            <ng-template swiperSlide><img class="swiper-pic" src="../../../assets/gallery-images/before1.jpg"></ng-template>
+            <ng-template swiperSlide><img class="swiper-pic" src="../../../assets/gallery-images/after1.jpg"></ng-template>
+            <ng-template swiperSlide><img class="swiper-pic" src="../../../assets/gallery-images/before2.jpg"></ng-template>
+            <ng-template swiperSlide><img class="swiper-pic" src="../../../assets/gallery-images/after2.jpg"></ng-template>
+            <ng-template swiperSlide><img class="swiper-pic" src="../../../assets/gallery-images/before3.jpg"></ng-template>
+            <ng-template swiperSlide><img class="swiper-pic" src="../../../assets/gallery-images/after3.jpg"></ng-template>
+          </swiper>
+        </div>
+        <!--Furnished or Nah-->
+        <label for='isFurnished' class='furnished'>
+          <input type="checkbox" id='isFurnished' name='isFurnished'>
+          Check here if the room is furnished
+        </label>
+        <!--Wall Condition Slider-->
+        <div class='slideContainer'>
+          What condition are the walls in?
+          <input type='range' min="0" max="10" value="5" class="slider" id="inCondition">
+        </div>
+        <!--Done with room button-->
+        <button class="Done">Done With This Room</button>

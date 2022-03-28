@@ -8,12 +8,17 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SwiperModule } from 'swiper/angular';
+import { EstimatorComponent } from './components/estimator/estimator.component';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { IntPaintEstimateComponent } from './components/int-paint-estimate/int-paint-estimate.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    HomepageComponent
+    HomepageComponent,
+    EstimatorComponent,
+    IntPaintEstimateComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +26,7 @@ import { SwiperModule } from 'swiper/angular';
     BrowserAnimationsModule,
     FormsModule,
     SwiperModule,
+    CdkAccordionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
