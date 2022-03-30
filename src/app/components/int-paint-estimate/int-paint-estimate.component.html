@@ -13,22 +13,22 @@
 
         <div class="swipers-container">
           <swiper #swiper class='swiper' [config]="config">
-            <ng-template swiperSlide> <input type="checkbox" id="cb1" />
+            <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb1" (change)="checkedState($event,checkBox)" [checked]=false/>
               <label for="cb1"> <img class="swiper-pic" src="../../../assets/gallery-images/before1.jpg"> </label>
             </ng-template>
-            <ng-template swiperSlide> <input type="checkbox" id="cb2" />
+            <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb2" (change)="checkedState($event,checkBox)" [checked]=false/>
               <label for="cb2"> <img class="swiper-pic" src="../../../assets/gallery-images/after1.jpg"> </label>
             </ng-template>
-            <ng-template swiperSlide> <input type="checkbox" id="cb3" />
+            <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb3" (change)="checkedState($event,checkBox)" [checked]=false/>
               <label for="cb3"> <img class="swiper-pic" src="../../../assets/gallery-images/before2.jpg"> </label>
             </ng-template>
-            <ng-template swiperSlide> <input type="checkbox" id="cb4" />
+            <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb4" (change)="checkedState($event,checkBox)" [checked]=false/>
               <label for="cb4"> <img class="swiper-pic" src="../../../assets/gallery-images/after2.jpg"> </label>
             </ng-template>
-            <ng-template swiperSlide> <input type="checkbox" id="cb5" />
+            <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb5" (change)="checkedState($event,checkBox)" [checked]=false/>
               <label for="cb5"> <img class="swiper-pic" src="../../../assets/gallery-images/before3.jpg"> </label>
             </ng-template>
-            <ng-template swiperSlide> <input type="checkbox" id="cb6" />
+            <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb6" (change)="checkedState($event,checkBox)" [checked]=false/>
               <label for="cb6"> <img class="swiper-pic" src="../../../assets/gallery-images/after3.jpg"> </label>
             </ng-template>
           </swiper>

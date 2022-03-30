@@ -14,8 +14,24 @@ export class IntPaintEstimateComponent implements OnInit, AfterContentChecked {
     pagination: true,
     navigation: true
   }
+  counter:number = 0;
 
   constructor() { }
+
+  selectedItems: number = 0;
+
+  checkedState(event:any, checked:any) {
+    if(event.target.checked === true){
+      if(this.counter < 1){
+        this.counter++
+      } else {
+        event.target.checked = false;
+      }
+    }
+    else if(this.counter>0){
+      this.counter--;
+    }
+  }
 
   ngOnInit(): void {
     Swiper.use([Navigation, Pagination])
