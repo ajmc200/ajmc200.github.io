@@ -1,5 +1,5 @@
 import { AfterContentChecked, ViewChild, Component, OnInit } from '@angular/core';
-import Swiper, { SwiperOptions, Pagination } from 'swiper';
+import Swiper, { SwiperOptions, Pagination, Navigation } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 
 @Component({
@@ -11,13 +11,14 @@ export class IntPaintEstimateComponent implements OnInit, AfterContentChecked {
   @ViewChild('swiper')swiper!: SwiperComponent;
 
   public config: SwiperOptions = {
-    pagination: true
+    pagination: true,
+    navigation: true
   }
 
   constructor() { }
 
   ngOnInit(): void {
-    Swiper.use([Pagination])
+    Swiper.use([Navigation, Pagination])
   }
 
   ngAfterContentChecked() {
