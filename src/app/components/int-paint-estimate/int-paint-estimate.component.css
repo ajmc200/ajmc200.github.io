@@ -51,7 +51,7 @@ input[type="checkbox"][id^="cb"] {
   
   :checked + label:before {
     content: "✓";
-    background-color: grey;
+    background-color: rgba(23, 179, 30, 0.562);
     transform: scale(1);
   }
   

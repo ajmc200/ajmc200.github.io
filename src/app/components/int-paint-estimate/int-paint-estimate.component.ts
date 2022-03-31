@@ -11,14 +11,13 @@ export class IntPaintEstimateComponent implements OnInit, AfterContentChecked {
   @ViewChild('swiper')swiper!: SwiperComponent;
 
   public config: SwiperOptions = {
-    pagination: true,
+    pagination: { type: 'fraction' },
     navigation: true
   }
-  counter:number = 0;
 
   constructor() { }
 
-  selectedItems: number = 0;
+  counter:number = 0;
 
   checkedState(event:any, checked:any) {
     if(event.target.checked === true){
