@@ -11,6 +11,7 @@ import { SwiperModule } from 'swiper/angular';
 import { EstimatorComponent } from './components/estimator/estimator.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { IntPaintEstimateComponent } from './components/int-paint-estimate/int-paint-estimate.component'
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { IntPaintEstimateComponent } from './components/int-paint-estimate/int-p
     FormsModule,
     SwiperModule,
     CdkAccordionModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

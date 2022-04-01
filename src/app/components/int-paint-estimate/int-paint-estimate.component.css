@@ -1,3 +1,7 @@
+.swipers-container{
+  position: relative;
+}
+
 .swiper {
     margin-bottom: 1rem;
   }
@@ -7,6 +11,23 @@
     width: 100%;
   }
 
+  .swiper-nav {
+    position: absolute;
+    width: 25%;
+    bottom: -5%;
+    background-color: white;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .before {
+    left: 20%;
+  }
+
+  .next {
+    right: 20%
+  }
 /* ====================================================== */
 
 input[type="checkbox"][id^="cb"] {
@@ -15,7 +36,7 @@ input[type="checkbox"][id^="cb"] {
   
   label {
     border: 1px solid #fff;
-    padding: 10px;
+    padding-bottom: 1.3rem;
     display: block;
     position: relative;
     margin: 10px;
@@ -46,7 +67,7 @@ input[type="checkbox"][id^="cb"] {
   }
   
   :checked + label {
-    border-color: #ddd;
+    border-color: none
   }
   
   :checked + label:before {

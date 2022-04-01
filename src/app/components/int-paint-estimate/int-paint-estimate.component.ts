@@ -7,12 +7,11 @@ import { SwiperComponent } from 'swiper/angular';
   templateUrl: './int-paint-estimate.component.html',
   styleUrls: ['./int-paint-estimate.component.css']
 })
-export class IntPaintEstimateComponent implements OnInit, AfterContentChecked {
-  @ViewChild('swiper')swiper!: SwiperComponent;
+export class IntPaintEstimateComponent implements OnInit {
+  @ViewChild('swiper') swiper?: SwiperComponent;
 
   public config: SwiperOptions = {
-    pagination: { type: 'fraction' },
-    navigation: true
+    pagination: { type: 'fraction' }
   }
 
   constructor() { }
@@ -36,10 +35,11 @@ export class IntPaintEstimateComponent implements OnInit, AfterContentChecked {
     Swiper.use([Navigation, Pagination])
   }
 
-  ngAfterContentChecked() {
-    if (this.swiper) {
-      this.swiper.updateSwiper({});
-    }
+  slideNext() {
+    this.swiper?.swiperRef.slideNext(100)
   }
 
+  slidePrev() {
+    this.swiper?.swiperRef.slidePrev(100);
+  }
 }
