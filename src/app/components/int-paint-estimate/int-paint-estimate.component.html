@@ -1,63 +1,85 @@
 <div class="component-container">
-  <button>Add Room</button>
 
-  <div class="swipers-container">
-    <swiper #swiper class='swiper' [config]="config">
-      <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb1" (change)="checkedState($event,checkBox)" [checked]=false/>
-        <label for="cb1"> <img class="swiper-pic" src="../../../assets/gallery-images/before1.jpg"> </label>
-      </ng-template>
-      <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb2" (change)="checkedState($event,checkBox)" [checked]=false/>
-        <label for="cb2"> <img class="swiper-pic" src="../../../assets/gallery-images/after1.jpg"> </label>
-      </ng-template>
-      <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb3" (change)="checkedState($event,checkBox)" [checked]=false/>
-        <label for="cb3"> <img class="swiper-pic" src="../../../assets/gallery-images/before2.jpg"> </label>
-      </ng-template>
-      <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb4" (change)="checkedState($event,checkBox)" [checked]=false/>
-        <label for="cb4"> <img class="swiper-pic" src="../../../assets/gallery-images/after2.jpg"> </label>
-      </ng-template>
-      <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb5" (change)="checkedState($event,checkBox)" [checked]=false/>
-        <label for="cb5"> <img class="swiper-pic" src="../../../assets/gallery-images/before3.jpg"> </label>
-      </ng-template>
-      <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb6" (change)="checkedState($event,checkBox)" [checked]=false/>
-        <label for="cb6"> <img class="swiper-pic" src="../../../assets/gallery-images/after3.jpg"> </label>
-      </ng-template>
-    </swiper>
-  </div>
+  <button (click)="addRoom()" *ngIf="!roomTypeToggle">Add Room</button>
 
-  <div class="swiper-navigation">
-    <button class="swiper-button before" (click)="slidePrev()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"/></svg> </button>
-    <button class="swiper-button next" (click)="slideNext()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg> </button>
-  </div>
+  <mat-horizontal-stepper class="stepper-comp" *ngIf="roomTypeToggle">
+    <mat-step label="address">
+      <p>list of different rooms</p>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="idk">
+      <div class="swipers-container">
+        <swiper #swiper class='swiper' [config]="config">
+          <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb1" (change)="checkedState($event,checkBox)" [checked]=false/>
+            <label for="cb1"> <img class="swiper-pic" src="../../../assets/gallery-images/before1.jpg"> </label>
+          </ng-template>
+          <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb2" (change)="checkedState($event,checkBox)" [checked]=false/>
+            <label for="cb2"> <img class="swiper-pic" src="../../../assets/gallery-images/after1.jpg"> </label>
+          </ng-template>
+          <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb3" (change)="checkedState($event,checkBox)" [checked]=false/>
+            <label for="cb3"> <img class="swiper-pic" src="../../../assets/gallery-images/before2.jpg"> </label>
+          </ng-template>
+          <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb4" (change)="checkedState($event,checkBox)" [checked]=false/>
+            <label for="cb4"> <img class="swiper-pic" src="../../../assets/gallery-images/after2.jpg"> </label>
+          </ng-template>
+          <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb5" (change)="checkedState($event,checkBox)" [checked]=false/>
+            <label for="cb5"> <img class="swiper-pic" src="../../../assets/gallery-images/before3.jpg"> </label>
+          </ng-template>
+          <ng-template swiperSlide> <input #checkBox type="checkbox" id="cb6" (change)="checkedState($event,checkBox)" [checked]=false/>
+            <label for="cb6"> <img class="swiper-pic" src="../../../assets/gallery-images/after3.jpg"> </label>
+          </ng-template>
+        </swiper>
+      </div>
+
+      <div class="swiper-navigation">
+        <button class="swiper-button before" (click)="slidePrev()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"/></svg> </button>
+        <button class="swiper-button next" (click)="slideNext()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg> </button>
+      </div>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <p>question 1</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <p>question 2</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <p>question 3</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
 
   <!--Furnished or Nah-->
 
   <!--Wall Condition Slider-->
 
   <!--Done with room button-->
-  <button class="Done">next</button>
 
 </div>
 
   <!-- Misc
-  <select>
-    <option value="" disabled selected>Select Account Type</option>
-    <option>Livning Room</option>
-    <option>Bedroom (Regular)</option>
-    <option>Bathroom (Master)</option>
-    <option>Entrance-Hall/Foyer</option>
-    <option>Kitchen</option>
-    <option>Dinning Room</option>
-    <option>Closets</option>
-    <option>Other...</option>
-  </select>
 
-  <label for='isFurnished' class='furnished'>
-    <input type="checkbox" id='isFurnished' name='isFurnished'>
-    Check here if the room is furnished
-  </label>
-
-  <div class='slideContainer'>
-    What condition are the walls in?
-    <input type='range' min="0" max="10" value="5" class="slider" id="inCondition">
-  </div>
   -->
