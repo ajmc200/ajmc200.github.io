@@ -2,6 +2,7 @@ import { ViewChild, Component, OnInit } from '@angular/core';
 import Swiper, { SwiperOptions, Pagination, Navigation } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ROOMLAYOUTS } from 'src/app/services/room-layouts'; 
 
 @Component({
   selector: 'app-int-paint-estimate',
@@ -21,6 +22,8 @@ export class IntPaintEstimateComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder) { }
 
+  roomLayouts = ROOMLAYOUTS;
+  selectedRoomType = 0;
   counter:number = 0;
   roomTypeToggle = false;
   layoutsToggle = false;
@@ -60,9 +63,7 @@ export class IntPaintEstimateComponent implements OnInit {
 
   addRoom() {
     this.roomTypeToggle = true
+    console.log(this.roomLayouts[0].pictures[0].picture)
   }
 
-  roomLayouts() {
-    this.layoutsToggle = true
-  }
 }
