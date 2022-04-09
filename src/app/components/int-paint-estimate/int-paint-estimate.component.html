@@ -3,11 +3,17 @@
   <button (click)="addRoom()" *ngIf="!roomTypeToggle">Add Room</button>
 
   <mat-horizontal-stepper class="stepper-comp" *ngIf="roomTypeToggle">
-    <mat-step label="address">
-      <p>list of different rooms</p>
-      <a>Bedroom</a>
-      <a>Living Room</a>
-      <a>Kitchen</a>
+    <mat-step label="Room type">
+      <label id="example-radio-group-label">What kind of room do you need painted</label>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="roomPicked">
+        <mat-radio-button class="example-radio-button" *ngFor="let room_type of room_types" [value]="room_type">
+          {{room_type}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>Your favorite room is: {{roomPicked}}</div>
 
       <div>
         <button mat-button matStepperPrevious>Back</button>

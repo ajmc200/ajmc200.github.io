@@ -28,6 +28,9 @@ export class IntPaintEstimateComponent implements OnInit {
   roomTypeToggle = false;
   layoutsToggle = false;
 
+  roomPicked!: string;
+  room_types: string[] = ['Bedroom', 'Bathroom', 'Kitchen', 'Living Room'];
+
   //Checkbox Limiter
   checkedState(event:any, checked:any) {
     if(event.target.checked === true){

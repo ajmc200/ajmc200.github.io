@@ -16,6 +16,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatFormFieldModule,
     MatNativeDateModule,
     HttpClientModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
