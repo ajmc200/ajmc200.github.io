@@ -3,17 +3,13 @@
   <button (click)="addRoom()" *ngIf="!roomTypeToggle">Add Room</button>
 
   <mat-horizontal-stepper class="stepper-comp" *ngIf="roomTypeToggle">
-    <mat-step label="Room type">
-      <label id="example-radio-group-label">What kind of room do you need painted</label>
-      <mat-radio-group
-        aria-labelledby="example-radio-group-label"
-        class="example-radio-group"
-        [(ngModel)]="roomPicked">
+    <mat-step label="Type">
+      <label class="radio-label">What kind of room do you need painted?</label>
+      <mat-radio-group class="example-radio-group" [(ngModel)]="roomPicked">
         <mat-radio-button class="example-radio-button" *ngFor="let room_type of room_types" [value]="room_type">
           {{room_type}}
         </mat-radio-button>
       </mat-radio-group>
-      <div>Your favorite room is: {{roomPicked}}</div>
 
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -21,7 +17,7 @@
       </div>
     </mat-step>
 
-    <mat-step label="idk">
+    <mat-step label="Size">
       <div class="swipers-container">
         <swiper #swiper class='swiper' [config]="config">
           <ng-template *ngFor="let picture of roomLayouts[selectedRoomType].pictures" swiperSlide> <input #checkBox type="checkbox" id="cb{{picture.picture}}" (change)="checkedState($event,checkBox)" [checked]=false/>

@@ -3,6 +3,11 @@
 }
 
 .stepper-comp {
+  color: #fff;
+}
+
+.radio-label {
+  border: none;
 }
 
 .example-radio-group {
@@ -10,6 +15,7 @@
   flex-direction: column;
   margin: 15px 0;
   align-items: flex-start;
+  border: none;
 }
 
 .example-radio-button {
@@ -17,7 +23,7 @@
 }
 
 .swiper {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
   
   .swiper-pic {
@@ -26,15 +32,22 @@
   }
 
 .swiper-navigation {
-  width: 100%;  
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15%; 
 }
 
   .swiper-button {
+    width: 30px;
+    height: 30px;
     background-color: white;
+    align-items: center;
+    border-radius: 50%;
     border: none;
     padding: 0;
     margin: 0;
-    width: 50%;
   }
 
 /* ====================================================== */
@@ -44,7 +57,7 @@ input[type="checkbox"][id^="cb"] {
   }
   
   label {
-    border: 1px solid #fff;
+    border: none;
     padding-bottom: 1.3rem;
     display: block;
     position: relative;
@@ -87,6 +100,6 @@ input[type="checkbox"][id^="cb"] {
   
   :checked + label img {
     transform: scale(0.9);
-    box-shadow: 0 0 5px #333;
+    box-shadow: 0 0 5px rgb(201, 210, 137);
     z-index: -1;
   }
