@@ -38,7 +38,24 @@
     </mat-step>
 
     <mat-step>
-      <p>question 1</p>
+      <p>What parts of the room would you like painted?</p>
+
+      <section class="example-section" [formGroup]="toppings">
+        <h4>Select all that apply:</h4>
+        <p>
+          <mat-checkbox formControlName="walls">Walls</mat-checkbox>
+          <mat-form-field appearance="fill">
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" placeholder="Ex. 2" min="1">
+            <mat-error>Min amount: 1</mat-error>
+          </mat-form-field>
+        </p> 
+        <p><mat-checkbox formControlName="ceiling">Ceiling</mat-checkbox></p>
+        <p><mat-checkbox formControlName="trim">Trim/Moulding</mat-checkbox></p>
+        <p><mat-checkbox formControlName="windows">Windows</mat-checkbox></p>
+        <p><mat-checkbox formControlName="doors">Door(s)</mat-checkbox></p>
+      </section>
+      
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -65,9 +82,5 @@
 </div>
 
   <!-- Misc
-    Furnished or Nah
-
     Wall Condition Slider
-
-    Done with room button
   -->

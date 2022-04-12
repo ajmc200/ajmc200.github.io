@@ -1,7 +1,7 @@
 import { ViewChild, Component, OnInit } from '@angular/core';
 import Swiper, { SwiperOptions, Pagination, Navigation } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { ROOMLAYOUTS } from 'src/app/services/room-layouts'; 
 
 @Component({
@@ -20,7 +20,17 @@ export class IntPaintEstimateComponent implements OnInit {
   secondFormGroup!: FormGroup;
   isEditable = false;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  toppings!: FormGroup;
+
+  constructor(private _formBuilder: FormBuilder) { 
+    this.toppings = _formBuilder.group({
+      walls: false,
+      ceiling: false,
+      trim: false,
+      windows: false,
+      doors: false,
+    });
+  }
 
   roomLayouts = ROOMLAYOUTS;
   selectedRoomType = 0;
