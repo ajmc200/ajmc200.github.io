@@ -16,30 +16,32 @@ export class IntPaintEstimateComponent implements OnInit {
     pagination: { type: 'fraction' }
   }
 
-  firstFormGroup!: FormGroup;
-  secondFormGroup!: FormGroup;
-  isEditable = false;
-
-  toppings!: FormGroup;
-
-  constructor(private _formBuilder: FormBuilder) { 
-    this.toppings = _formBuilder.group({
-      walls: false,
-      ceiling: false,
-      trim: false,
-      windows: false,
-      doors: false,
-    });
-  }
-
   roomLayouts = ROOMLAYOUTS;
-  selectedRoomType = 0;
+
   counter:number = 0;
   roomTypeToggle = false;
   layoutsToggle = false;
 
   roomPicked!: string;
+  //roomObject: any[] = [{0: 'Bedroom'}, {1: 'Bathroom'}, {2: 'Kitchen'}, {3: 'Living Room'}]
   room_types: string[] = ['Bedroom', 'Bathroom', 'Kitchen', 'Living Room'];
+
+  //new approach: build out all the possible swiper components but hide them, and display the appropriate one based on what is selected
+
+  constructor(private fb: FormBuilder) { 
+    
+  }
+  toppings = this.fb.group({
+    walls: [false],
+    ceiling: [false],
+    trim: [false],
+    windows: [false],
+    doors: [false],
+  });
+
+  ngOnInit() {
+    Swiper.use([Navigation, Pagination])
+  }
 
   //Checkbox Limiter
   checkedState(event:any, checked:any) {
@@ -55,28 +57,18 @@ export class IntPaintEstimateComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    Swiper.use([Navigation, Pagination])
-
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-  }
-
   //swipe manipulation
   slideNext() {
-    this.swiper?.swiperRef.slideNext(100)
+    this.swiper?.swiperRef.slideNext(100);
   }
   slidePrev() {
     this.swiper?.swiperRef.slidePrev(100);
   }
 
   addRoom() {
-    this.roomTypeToggle = true
-    console.log(this.roomLayouts[0].pictures[0].picture)
+    this.roomTypeToggle = true;
+
+    console.log()
   }
 
 }

@@ -4,5 +4,6 @@ export interface ILayout {
 }
 
 export interface ILayouts {
+    name: string,
     pictures: ILayout[]
 }
