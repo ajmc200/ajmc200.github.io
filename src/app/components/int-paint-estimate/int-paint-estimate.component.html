@@ -4,7 +4,7 @@
 
   <mat-horizontal-stepper class="stepper-comp" *ngIf="roomTypeToggle">
     <mat-step label="Type">
-      <label class="radio-label">What kind of room do you need painted?</label>
+      <label class="radio-label"><h3>What kind of room do you need painted?</h3></label>
       <mat-radio-group class="example-radio-group" [(ngModel)]="roomPicked">
         <mat-radio-button class="example-radio-button" *ngFor="let room_type of room_types" [value]="room_type">
           {{room_type}}
@@ -18,11 +18,16 @@
     </mat-step>
 
     <mat-step label="Size">
+      <div  class="center-text">
+      <h3>Select an image that closely matches your room.</h3>
+      <h2>OR</h2>
+      <h3>If you know the dimensions of your room</h3> <button (click)="dimensions()">Insert Dimensions</button>
+      </div>
       <div *ngFor="let swiper_comp of roomLayouts">
         <div class="swipers-container" *ngIf="swiper_comp.name == roomPicked">
           <swiper #swiper class='swiper' [config]="config">
             <ng-template *ngFor="let picture of swiper_comp.pictures" swiperSlide> 
-              <input #radioButton name="options" type="radio" id="cb{{picture.picture}}" [checked]=false/>
+              <input #radioButton name="options" type="radio" id="cb{{picture.picture}}" [(ngModel)]="sizePicked" [value]="picture.size" [checked]=false/>
               <label for="cb{{picture.picture}}"> <img class="swiper-pic" src={{picture.picture}}> </label>
             </ng-template>
           </swiper>
@@ -41,22 +46,29 @@
     </mat-step>
 
     <mat-step>
-      <p>What parts of the room would you like painted?</p>
+      <h3>What parts of the room would you like painted?</h3>
 
       <section class="example-section" [formGroup]="toppings">
         <h4>Select all that apply:</h4>
+        <p><mat-checkbox formControlName="walls">Walls</mat-checkbox></p> 
+        <p><mat-checkbox formControlName="ceiling">Ceiling</mat-checkbox></p>
+        <p><mat-checkbox formControlName="trim">Trim/Moulding</mat-checkbox></p>
         <p>
-          <mat-checkbox formControlName="walls">Walls</mat-checkbox>
-          <mat-form-field appearance="fill" *ngIf="toppings.get('walls')?.value">
+          <mat-checkbox formControlName="windows">Windows</mat-checkbox>
+          <mat-form-field appearance="fill" *ngIf="toppings.get('windows')?.value">
             <mat-label>Quantity</mat-label>
             <input matInput type="number" placeholder="Ex. 2" min="1">
             <mat-error>Min amount: 1</mat-error>
           </mat-form-field>
-        </p> 
-        <p><mat-checkbox formControlName="ceiling">Ceiling</mat-checkbox></p>
-        <p><mat-checkbox formControlName="trim">Trim/Moulding</mat-checkbox></p>
-        <p><mat-checkbox formControlName="windows">Windows</mat-checkbox></p>
-        <p><mat-checkbox formControlName="doors">Door(s)</mat-checkbox></p>
+        </p>
+        <p>
+          <mat-checkbox formControlName="doors">Door(s)</mat-checkbox>
+          <mat-form-field appearance="fill" *ngIf="toppings.get('doors')?.value">
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" placeholder="Ex. 2" min="1">
+            <mat-error>Min amount: 1</mat-error>
+          </mat-form-field>
+        </p>
       </section>
       
       <div>
@@ -66,7 +78,21 @@
     </mat-step>
 
     <mat-step>
-      <p>question 2</p>
+      <label class="radio-label"><h3>What condition are the walls in?</h3></label>
+      <mat-radio-group class="example-radio-group" [(ngModel)]="conditionPicked">
+        <mat-radio-button class="example-radio-button" [value]="'new'">
+          New: newly installed drywall, no damages, prep needed
+        </mat-radio-button> 
+        <mat-radio-button class="example-radio-button" [value]="'good'">
+          Good: minor scratches or chips, no stains, little prep needed
+        </mat-radio-button> 
+        <mat-radio-button class="example-radio-button" [value]="'moderate'">
+          Moderate: some scratches and minor holes, little to no stains, prep needed
+        </mat-radio-button> 
+        <mat-radio-button class="example-radio-button" [value]="'damaged'">
+          Damaged: deep scratches, holes that need patching, some stains, prep needed 
+        </mat-radio-button> 
+      </mat-radio-group>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -75,6 +101,7 @@
 
     <mat-step>
       <p>question 3</p>
+      <button (click)="submit()">submit</button>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>

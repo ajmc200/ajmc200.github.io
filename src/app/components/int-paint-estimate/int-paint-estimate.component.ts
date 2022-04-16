@@ -18,19 +18,16 @@ export class IntPaintEstimateComponent implements OnInit {
 
   roomLayouts = ROOMLAYOUTS;
 
-  counter:number = 0;
   roomTypeToggle = false;
   layoutsToggle = false;
 
-  roomPicked!: string;
-  //roomObject: any[] = [{0: 'Bedroom'}, {1: 'Bathroom'}, {2: 'Kitchen'}, {3: 'Living Room'}]
   room_types: string[] = ['Bedroom', 'Bathroom', 'Kitchen', 'Living Room'];
+  roomPicked!: string;
+  sizePicked!: number;
+  conditionPicked!: string;
 
-  //new approach: build out all the possible swiper components but hide them, and display the appropriate one based on what is selected
+  constructor(private fb: FormBuilder) { }
 
-  constructor(private fb: FormBuilder) { 
-    
-  }
   toppings = this.fb.group({
     walls: [false],
     ceiling: [false],
@@ -53,8 +50,16 @@ export class IntPaintEstimateComponent implements OnInit {
 
   addRoom() {
     this.roomTypeToggle = true;
+  }
 
-    console.log()
+  dimensions() {
+  }
+
+  submit() {
+    console.log(this.roomPicked)
+    console.log(this.sizePicked)
+    console.log(this.toppings.controls)
+    console.log(this.conditionPicked)
   }
 
 }
