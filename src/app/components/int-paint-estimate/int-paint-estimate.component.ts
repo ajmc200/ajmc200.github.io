@@ -43,20 +43,6 @@ export class IntPaintEstimateComponent implements OnInit {
     Swiper.use([Navigation, Pagination])
   }
 
-  //Checkbox Limiter
-  checkedState(event:any, checked:any) {
-    if(event.target.checked === true){
-      if(this.counter < 1){
-        this.counter++
-      } else {
-        event.target.checked = false;
-      }
-    }
-    else if(this.counter>0){
-      this.counter--;
-    }
-  }
-
   //swipe manipulation
   slideNext() {
     this.swiper?.swiperRef.slideNext(100);
