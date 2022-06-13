@@ -1,8 +1,8 @@
 <div class="component-container">
 
-  <button (click)="addRoom()" *ngIf="!roomTypeToggle">Add Room</button>
+  <button (click)="addRoom()" *ngIf="!visible">Add Room</button>
 
-  <mat-horizontal-stepper class="stepper-comp" *ngIf="roomTypeToggle">
+  <mat-horizontal-stepper class="stepper-comp" *ngIf="visible">
     <mat-step label="Type">
       <label class="radio-label"><h3>What kind of room do you need painted?</h3></label>
       <mat-radio-group class="example-radio-group" [(ngModel)]="roomPicked">
@@ -12,7 +12,7 @@
       </mat-radio-group>
 
       <div>
-        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperPrevious (click)="!visible = false">Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
@@ -57,7 +57,7 @@
           <mat-checkbox formControlName="windows">Windows</mat-checkbox>
           <mat-form-field appearance="fill" *ngIf="toppings.get('windows')?.value">
             <mat-label>Quantity</mat-label>
-            <input matInput type="number" placeholder="Ex. 2" min="1">
+            <input matInput type="number" formControlName="windowsQuantity" placeholder="Ex. 2" min="1">
             <mat-error>Min amount: 1</mat-error>
           </mat-form-field>
         </p>
@@ -65,7 +65,7 @@
           <mat-checkbox formControlName="doors">Door(s)</mat-checkbox>
           <mat-form-field appearance="fill" *ngIf="toppings.get('doors')?.value">
             <mat-label>Quantity</mat-label>
-            <input matInput type="number" placeholder="Ex. 2" min="1">
+            <input matInput type="number" formControlName="doorsQuantity" placeholder="Ex. 2" min="1">
             <mat-error>Min amount: 1</mat-error>
           </mat-form-field>
         </p>
@@ -79,38 +79,34 @@
 
     <mat-step>
       <label class="radio-label"><h3>What condition are the walls in?</h3></label>
-      <mat-radio-group class="example-radio-group" [(ngModel)]="conditionPicked">
-        <mat-radio-button class="example-radio-button" [value]="'new'">
+      <mat-radio-group class="example-radio-group" aria-labelledby="example-radio-group-label" [(ngModel)]="conditionPicked">
+        <mat-radio-button class="radio-button-long example-radio-button" [value]="'new'">
           New: newly installed drywall, no damages, prep needed
         </mat-radio-button> 
-        <mat-radio-button class="example-radio-button" [value]="'good'">
+        <mat-radio-button class="radio-button-long example-radio-button" [value]="'good'">
           Good: minor scratches or chips, no stains, little prep needed
         </mat-radio-button> 
-        <mat-radio-button class="example-radio-button" [value]="'moderate'">
-          Moderate: some scratches and minor holes, little to no stains, prep needed
+        <mat-radio-button class="radio-button-long example-radio-button" [value]="'moderate'">
+          Moderate: some scratches and minor holes, <br> little to no stains, prep needed
         </mat-radio-button> 
-        <mat-radio-button class="example-radio-button" [value]="'damaged'">
-          Damaged: deep scratches, holes that need patching, some stains, prep needed 
+        <mat-radio-button class="radio-button-long example-radio-button" [value]="'damaged'">
+          <div> Damaged: deep scratches, holes that need patching, <br> some stains, prep needed </div>
         </mat-radio-button> 
       </mat-radio-group>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-
-    <mat-step>
-      <p>question 3</p>
-      <button (click)="submit()">submit</button>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext (click)="submit()">submit</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>  
 
-</div>
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip *ngFor="let room of roomz" (removed)="remove(room)">
+      {{room.roomType}} {{room.roomCount}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+  </mat-chip-list>
 
-  <!-- Misc
-    Wall Condition Slider
-  -->
+</div>
