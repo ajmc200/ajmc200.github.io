@@ -7,6 +7,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { ROOMLAYOUTS } from 'src/app/services/room-layouts'; 
 
 export interface Room {
+  customName: string;
   roomCount: number;
   roomType: string;
 }
@@ -35,7 +36,7 @@ export class IntPaintEstimateComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  toppings = this.fb.group({
+  roomFeature = this.fb.group({
     walls: [false],
     ceiling: [false],
     trim: [false],
@@ -48,7 +49,14 @@ export class IntPaintEstimateComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   roomz: Room[] = [];
-  currentroomCount: number[] = [1,1,1,1];
+
+  chipCountMap: any = new Map<string, Set<number>>([
+    ["Bedroom",new Set<number>([0])],
+    ["Bathroom",new Set<number>([0])],
+    ["Kitchen",new Set<number>([0])],
+    ["Living Room",new Set<number>([0])]
+  ]);
+  
 
   ngOnInit() {
     Swiper.use([Navigation, Pagination])
@@ -72,44 +80,30 @@ export class IntPaintEstimateComponent implements OnInit {
   submit() {
     console.log(this.roomPicked)
     console.log(this.sizePicked)
-    console.log(this.toppings.controls)
+    console.log(this.roomFeature.controls)
+    console.log(this.roomFeature.controls['windowsQuantity'].value)
     console.log(this.conditionPicked)
-    console.log(this.toppings.controls['windowsQuantity'].value)
 
     this.add();
   }
 
   add(): void {
-    switch (this.roomPicked) {
-      case "Bedroom" :{
-        this.roomz.push({roomCount: this.currentroomCount[0], roomType:this.roomPicked});
-        this.currentroomCount[0]++
-        break;
-      }
-      case "Bathroom" :{
-        this.roomz.push({roomCount: this.currentroomCount[1], roomType:this.roomPicked});
-        this.currentroomCount[1]++
-        break;
-      }
-      case "Kitchen" :{
-        this.roomz.push({roomCount: this.currentroomCount[2], roomType:this.roomPicked});
-        this.currentroomCount[2]++
-        break;
-      }
-      case "Living Room" :{
-        this.roomz.push({roomCount: this.currentroomCount[3], roomType:this.roomPicked});
-        this.currentroomCount[3]++
-        break;
-      }
-    }
+    let roomCount = 1;
+    let roomCountArray = this.chipCountMap.get(this.roomPicked);
+    
+    while(roomCountArray.has(roomCount)) roomCount++;
+
+    roomCountArray.add(roomCount);
+
+    this.roomz.push({customName:'', roomCount: roomCount, roomType:this.roomPicked});
   }
 
   remove(room: Room): void {
     const index = this.roomz.indexOf(room);
 
-    if (index >= 0) {
-      this.roomz.splice(index, 1);
-    }
+    this.chipCountMap.get(room.roomType).delete(room.roomCount);
+
+    if (index >= 0) this.roomz.splice(index, 1);
   }
 
 }
