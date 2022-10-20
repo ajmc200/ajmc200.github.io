@@ -2,10 +2,10 @@
 
   <button (click)="addRoom()" *ngIf="!visible">Add Room</button>
 
-  <mat-horizontal-stepper class="stepper-comp" *ngIf="visible">
+  <mat-horizontal-stepper class="stepper-comp" *ngIf="visible" [formGroup]="roomDetailsForm">
     <mat-step label="Type">
       <label class="radio-label"><h3>What kind of room do you need painted?</h3></label>
-      <mat-radio-group class="example-radio-group" [(ngModel)]="roomPicked">
+      <mat-radio-group class="example-radio-group" formControlName="roomPicked">
         <mat-radio-button class="example-radio-button" *ngFor="let room_type of room_types" [value]="room_type">
           {{room_type}}
         </mat-radio-button> 
@@ -24,17 +24,17 @@
       <h3>If you know the dimensions of your room</h3> <button (click)="dimensions()">Insert Dimensions</button>
       </div>
       <div *ngFor="let swiper_comp of roomLayouts">
-        <div class="swipers-container" *ngIf="swiper_comp.name == roomPicked">
+        <div class="swipers-container" *ngIf="swiper_comp.name == roomDetailsForm.get('roomPicked')?.value">
           <swiper #swiper class='swiper' [config]="config">
             <ng-template *ngFor="let picture of swiper_comp.pictures" swiperSlide> 
-              <input #radioButton name="options" type="radio" id="cb{{picture.picture}}" [(ngModel)]="sizePicked" [value]="picture.size" [checked]=false/>
+              <input #radioButton name="sizePicked" type="radio" id="cb{{picture.picture}}" formControlName="sizePicked" [value]="picture.size" [checked]=false/>
               <label for="cb{{picture.picture}}"> <img class="swiper-pic" src={{picture.picture}}> </label>
             </ng-template>
           </swiper>
         </div>
       </div>
 
-      <div class="swiper-navigation" *ngIf="roomPicked">
+      <div class="swiper-navigation" *ngIf="roomDetailsForm.get('roomPicked')?.value">
         <button class="swiper-button before" (click)="slidePrev()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"/></svg> </button>
         <button class="swiper-button next" (click)="slideNext()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg> </button>
       </div>
@@ -48,14 +48,14 @@
     <mat-step>
       <h3>What parts of the room would you like painted?</h3>
 
-      <section class="example-section" [formGroup]="roomFeature">
+      <section class="example-section" formGroupName="roomFeaturesForm">
         <h4>Select all that apply:</h4>
         <p><mat-checkbox formControlName="walls">Walls</mat-checkbox></p> 
         <p><mat-checkbox formControlName="ceiling">Ceiling</mat-checkbox></p>
         <p><mat-checkbox formControlName="trim">Trim/Moulding</mat-checkbox></p>
         <p>
           <mat-checkbox formControlName="windows">Windows</mat-checkbox>
-          <mat-form-field appearance="fill" *ngIf="roomFeature.get('windows')?.value">
+          <mat-form-field appearance="fill" *ngIf="roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.value">
             <mat-label>Quantity</mat-label>
             <input matInput type="number" formControlName="windowsQuantity" placeholder="Ex. 2" min="1">
             <mat-error>Min amount: 1</mat-error>
@@ -63,7 +63,7 @@
         </p>
         <p>
           <mat-checkbox formControlName="doors">Door(s)</mat-checkbox>
-          <mat-form-field appearance="fill" *ngIf="roomFeature.get('doors')?.value">
+          <mat-form-field appearance="fill" *ngIf="roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.value">
             <mat-label>Quantity</mat-label>
             <input matInput type="number" formControlName="doorsQuantity" placeholder="Ex. 2" min="1">
             <mat-error>Min amount: 1</mat-error>
@@ -79,7 +79,7 @@
 
     <mat-step>
       <label class="radio-label"><h3>What condition are the walls in?</h3></label>
-      <mat-radio-group class="example-radio-group" aria-labelledby="example-radio-group-label" [(ngModel)]="conditionPicked">
+      <mat-radio-group class="example-radio-group" aria-labelledby="example-radio-group-label" formControlName="conditionPicked">
         <mat-radio-button class="radio-button-long example-radio-button" [value]="'new'">
           New: newly installed drywall, no damages, prep needed
         </mat-radio-button> 
@@ -95,14 +95,15 @@
       </mat-radio-group>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="submit()">submit</button>
+        <button mat-button (click)="submit(); roomDetailsForm.reset()">submit</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>  
 
   <mat-chip-list #chipList aria-label="Fruit selection">
-    <mat-chip *ngFor="let room of roomz" (removed)="remove(room)">
-      {{room.roomType}} {{room.roomCount}}
+    <mat-chip *ngFor="let room of roomz" (removed)="remove(room)" (click)="edit(room)">
+      <mat-icon>edit</mat-icon>
+      {{room.customName}}
       <button matChipRemove>
         <mat-icon>cancel</mat-icon>
       </button>

@@ -9,7 +9,16 @@ import { ROOMLAYOUTS } from 'src/app/services/room-layouts';
 export interface Room {
   customName: string;
   roomCount: number;
-  roomType: string;
+  roomPicked: string;
+  sizePicked: number;
+  conditionPicked: string;
+  walls: boolean;
+  ceiling: boolean;
+  trim: boolean;
+  windows: boolean;
+  doors: boolean;
+  windowsQuantity: number;
+  doorsQuantity: number;
 }
 
 @Component({
@@ -30,20 +39,23 @@ export class IntPaintEstimateComponent implements OnInit {
   layoutsToggle = false;
 
   room_types: string[] = ['Bedroom', 'Bathroom', 'Kitchen', 'Living Room'];
-  roomPicked!: string;
-  sizePicked!: number;
-  conditionPicked!: string;
 
   constructor(private fb: FormBuilder) { }
 
-  roomFeature = this.fb.group({
-    walls: [false],
-    ceiling: [false],
-    trim: [false],
-    windows: [false],
-    doors: [false],
-    windowsQuantity: [],
-    doorsQuantity: [],
+  roomDetailsForm = this.fb.group({
+    roomPicked: [''],
+    sizePicked: [''],
+    conditionPicked: [''],
+
+    roomFeaturesForm: this.fb.group({
+      walls: [false],
+      ceiling: [false],
+      trim: [false],
+      windows: [false],
+      doors: [false],
+      windowsQuantity: [],
+      doorsQuantity: [],
+    })
   });
 
   addOnBlur = true;
@@ -78,32 +90,58 @@ export class IntPaintEstimateComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.roomPicked)
-    console.log(this.sizePicked)
-    console.log(this.roomFeature.controls)
-    console.log(this.roomFeature.controls['windowsQuantity'].value)
-    console.log(this.conditionPicked)
-
     this.add();
+    this.visible = false;
   }
 
   add(): void {
     let roomCount = 1;
-    let roomCountArray = this.chipCountMap.get(this.roomPicked);
+    const roomPicked = this.roomDetailsForm.get('roomPicked')?.value;
+    let roomCountArray = this.chipCountMap.get(roomPicked);
     
     while(roomCountArray.has(roomCount)) roomCount++;
 
     roomCountArray.add(roomCount);
 
-    this.roomz.push({customName:'', roomCount: roomCount, roomType:this.roomPicked});
+    this.roomz.push({
+      customName     : roomPicked+' '+roomCount, 
+      roomCount      : roomCount, 
+      roomPicked     : roomPicked, 
+      sizePicked     : this.roomDetailsForm.get('sizePicked')?.value,
+      conditionPicked: this.roomDetailsForm.get('conditionPicked')?.value,
+      walls          : this.roomDetailsForm.controls['roomFeaturesForm'].get('walls')?.value,
+      ceiling        : this.roomDetailsForm.controls['roomFeaturesForm'].get('ceiling')?.value,
+      trim           : this.roomDetailsForm.controls['roomFeaturesForm'].get('trim')?.value,
+      windows        : this.roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.value,
+      doors          : this.roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.value,
+      windowsQuantity: this.roomDetailsForm.controls['roomFeaturesForm'].get('windowsQuantity')?.value,
+      doorsQuantity  : this.roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')?.value,
+    });
   }
 
   remove(room: Room): void {
     const index = this.roomz.indexOf(room);
 
-    this.chipCountMap.get(room.roomType).delete(room.roomCount);
+    this.chipCountMap.get(room.roomPicked).delete(room.roomCount);
 
     if (index >= 0) this.roomz.splice(index, 1);
+  }
+
+  edit(room: Room): void {
+    console.log(room)
+  }
+
+  resetForm() {
+    this.roomDetailsForm.controls['roomPicked'].setValue('');
+    this.roomDetailsForm.controls['sizePicked'].setValue('');
+    this.roomDetailsForm.controls['conditionPicked'].setValue('');
+    this.roomDetailsForm.controls['roomFeaturesForm'].get('walls')?.setValue(false);
+    this.roomDetailsForm.controls['roomFeaturesForm'].get('ceiling')?.setValue(false);
+    this.roomDetailsForm.controls['roomFeaturesForm'].get('trim')?.setValue(false);
+    this.roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.setValue(false);
+    this.roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.setValue(false);
+    this.roomDetailsForm.controls['roomFeaturesForm'].get('windowsQuantity')?.setValue([]);
+    this.roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')?.setValue([]);
   }
 
 }
