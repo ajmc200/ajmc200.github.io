@@ -86,6 +86,7 @@ export class IntPaintEstimateComponent implements OnInit {
 
   addRoom() {
     this.visible = true;
+    this.editThisRoom = null;
   }
 
   dimensions() {

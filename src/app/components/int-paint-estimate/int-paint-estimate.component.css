@@ -10,8 +10,22 @@ h1, h2, h3, h4 {
   position: relative;
 }
 
+.top-buttons {
+  display: flex;
+  justify-content: right;
+}
+
 .stepper-comp {
   color: #fff;
+}
+
+.mat-stepper-horizontal {
+  border-radius: 4%;
+  margin-bottom: 5px;
+}
+
+.radio-content {
+  white-space: normal;
 }
 
 .radio-label {
