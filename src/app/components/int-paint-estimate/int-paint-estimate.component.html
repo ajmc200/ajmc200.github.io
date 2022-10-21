@@ -95,7 +95,8 @@
       </mat-radio-group>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="submit(); roomDetailsForm.reset()">submit</button>
+        <button mat-button (click)="submit(); roomDetailsForm.reset()" *ngIf="editThisRoom == null">Done</button>
+        <button mat-button (click)="save(); roomDetailsForm.reset()" *ngIf="editThisRoom != null">Save</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>  
