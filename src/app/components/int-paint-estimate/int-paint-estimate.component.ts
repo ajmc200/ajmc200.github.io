@@ -165,4 +165,7 @@ export class IntPaintEstimateComponent implements OnInit {
     this.editThisRoom = null;
   }
 
+  calculate() {
+    console.log('itssa me mario!')
+  }
 }

@@ -5,7 +5,22 @@
   <mat-horizontal-stepper class="stepper-comp" *ngIf="visible" [formGroup]="roomDetailsForm">
     <mat-step label="">
       <label class="radio-label"><h3>What kind of room do you need painted?</h3></label>
-      <mat-radio-group class="example-radio-group" formControlName="roomPicked">
+      <div [formGroup] = roomDetailsForm>
+        <mat-form-field appearance="fill">
+          <mat-label>Room Name: (Optional)</mat-label>
+          <input 
+            matInput type="text" formControlName="customName" 
+            placeholder="ex. Master Bedroom"
+            value="{{
+            (this.roomDetailsForm.get('customName')?.value && this.roomDetailsForm.get('customName')?.value != '') 
+              ? this.roomDetailsForm.get('customName')?.value
+              : ''
+            }}"
+          >
+          <mat-error>Min amount: 1</mat-error>
+        </mat-form-field>
+      </div>
+      <mat-radio-group class="example-radio-group" formControlName="roomPicked" required>
         <mat-radio-button class="example-radio-button" *ngFor="let room_type of room_types" [value]="room_type">
           {{room_type}}
         </mat-radio-button> 
@@ -79,7 +94,7 @@
 
     <mat-step>
       <label class="radio-label"><h3>What condition are the walls in?</h3></label>
-      <mat-radio-group class="example-radio-group" aria-labelledby="example-radio-group-label" formControlName="conditionPicked">
+      <mat-radio-group class="example-radio-group" aria-labelledby="example-radio-group-label" formControlName="conditionPicked" required>
         <mat-radio-button class="radio-button-long example-radio-button" [value]="'new'">
           <span class="radio-content">
             New: newly installed drywall, no damages, prep needed
@@ -110,21 +125,13 @@
   </mat-horizontal-stepper>  
 
   <div class="bottom-bar" *ngIf="visible">
-    <div [formGroup] = roomDetailsForm>
-      <input 
-        style="border-radius: 5px;" placeholder="Room Name:"
-        formControlName="customName" 
-        value="{{
-        (this.roomDetailsForm.get('customName')?.value && this.roomDetailsForm.get('customName')?.value != '') 
-          ? this.roomDetailsForm.get('customName')?.value
-          : ''
-        }}"
-      >
-    </div>
     <div>
       <div class="bottom-buttons">
         <button mat-raised-button (click)="save(); roomDetailsForm.reset()" *ngIf="editThisRoom">
           Save
+        </button>
+        <button mat-raised-button (click)="submit(); roomDetailsForm.reset()" *ngIf="!editThisRoom && roomDetailsForm.valid">
+          Done
         </button>
         <button mat-raised-button (click)="!visible = false; roomDetailsForm.reset()">
           Cancel
@@ -133,14 +140,23 @@
     </div>
   </div>
 
+  <div>
+    <h2 style="display: inline; margin-left: 33%;">Your Rooms: </h2>
+  </div>
+
   <mat-chip-list #chipList aria-label="Fruit selection">
+    <h3 style="display: inline;" *ngIf="roomz.length < 1"><i>Empty</i></h3>
     <mat-chip *ngFor="let room of roomz" (removed)="remove(room)" (click)="edit(room)">
       <mat-icon>edit</mat-icon>
-      {{room.customName}}
+      - {{room.customName}} -
       <button matChipRemove>
         <mat-icon>cancel</mat-icon>
       </button>
     </mat-chip>
   </mat-chip-list>
+
+  <div class="bottom-bar">
+    <button class="calc-button" mat-raised-button (click)="calculate()">Calculate</button>
+  </div>
 
 </div>
