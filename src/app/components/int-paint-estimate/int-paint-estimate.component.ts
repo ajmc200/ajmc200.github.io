@@ -45,6 +45,7 @@ export class IntPaintEstimateComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   roomDetailsForm = this.fb.group({
+    customName: [''],
     roomPicked: [''],
     sizePicked: [''],
     conditionPicked: [''],
@@ -103,8 +104,12 @@ export class IntPaintEstimateComponent implements OnInit {
     while(roomCountArray.has(roomCount)) roomCount++;
     roomCountArray.add(roomCount);
 
+    const customName = (this.roomDetailsForm.get('customName')?.value == '' || this.roomDetailsForm.get('customName')?.value == null) 
+      ? this.roomDetailsForm.get('roomPicked')?.value+' '+roomCount 
+      : this.roomDetailsForm.get('customName')?.value
+
     this.roomz.push({
-      customName     : this.roomDetailsForm.get('roomPicked')?.value+' '+roomCount, 
+      customName     : customName, 
       roomCount      : roomCount, 
       roomPicked     : this.roomDetailsForm.get('roomPicked')?.value, 
       sizePicked     : this.roomDetailsForm.get('sizePicked')?.value,
@@ -117,6 +122,7 @@ export class IntPaintEstimateComponent implements OnInit {
       windowsQuantity: this.roomDetailsForm.controls['roomFeaturesForm'].get('windowsQuantity')?.value,
       doorsQuantity  : this.roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')?.value,
     });
+    console.log(this.roomz)
   }
 
   remove(room: Room): void {
@@ -130,6 +136,7 @@ export class IntPaintEstimateComponent implements OnInit {
   edit(room: Room): void {
     this.editThisRoom = room;
 
+    this.roomDetailsForm.controls['customName'].setValue(room.customName);
     this.roomDetailsForm.controls['roomPicked'].setValue(room.roomPicked);
     this.roomDetailsForm.controls['sizePicked'].setValue(room.sizePicked);
     this.roomDetailsForm.controls['conditionPicked'].setValue(room.conditionPicked);

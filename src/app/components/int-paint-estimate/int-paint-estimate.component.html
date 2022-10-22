@@ -1,9 +1,9 @@
 <div class="component-container">
 
-  <button (click)="addRoom()" *ngIf="!visible">Add Room</button>
+  <button class="add-button" mat-raised-button (click)="addRoom()" *ngIf="!visible">Add Room</button>
 
   <mat-horizontal-stepper class="stepper-comp" *ngIf="visible" [formGroup]="roomDetailsForm">
-    <mat-step label="Type">
+    <mat-step label="">
       <label class="radio-label"><h3>What kind of room do you need painted?</h3></label>
       <mat-radio-group class="example-radio-group" formControlName="roomPicked">
         <mat-radio-button class="example-radio-button" *ngFor="let room_type of room_types" [value]="room_type">
@@ -17,7 +17,7 @@
       </div>
     </mat-step>
 
-    <mat-step label="Size">
+    <mat-step label="">
       <div  class="center-text">
       <h3>Select an image that closely matches your room.</h3>
       <h2>OR</h2>
@@ -109,14 +109,27 @@
     </mat-step>
   </mat-horizontal-stepper>  
 
-  <div>
-    <div class="top-buttons">
-      <button mat-raised-button (click)="save(); roomDetailsForm.reset()" *ngIf="visible && editThisRoom">
-        Save
-      </button>
-      <button mat-raised-button (click)="!visible = false; roomDetailsForm.reset()" *ngIf="visible">
-        Cancel
-      </button>
+  <div class="bottom-bar" *ngIf="visible">
+    <div [formGroup] = roomDetailsForm>
+      <input 
+        style="border-radius: 5px;" placeholder="Room Name:"
+        formControlName="customName" 
+        value="{{
+        (this.roomDetailsForm.get('customName')?.value && this.roomDetailsForm.get('customName')?.value != '') 
+          ? this.roomDetailsForm.get('customName')?.value
+          : ''
+        }}"
+      >
+    </div>
+    <div>
+      <div class="bottom-buttons">
+        <button mat-raised-button (click)="save(); roomDetailsForm.reset()" *ngIf="editThisRoom">
+          Save
+        </button>
+        <button mat-raised-button (click)="!visible = false; roomDetailsForm.reset()">
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
 
