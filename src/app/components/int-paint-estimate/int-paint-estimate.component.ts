@@ -5,21 +5,8 @@ import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { ROOMLAYOUTS } from 'src/app/services/room-layouts'; 
-
-export interface Room {
-  customName: string;
-  roomCount: number;
-  roomPicked: string;
-  sizePicked: number;
-  conditionPicked: string;
-  walls: boolean;
-  ceiling: boolean;
-  trim: boolean;
-  windows: boolean;
-  doors: boolean;
-  windowsQuantity: number;
-  doorsQuantity: number;
-}
+import { Room } from '../../services/room';
+import { InteriorCalculatorService } from '../../services/calculate/interior-calculator.service';
 
 @Component({
   selector: 'app-int-paint-estimate',
@@ -41,6 +28,8 @@ export class IntPaintEstimateComponent implements OnInit {
   editThisRoom: any = null; //holds oldRoom to edit/update
 
   room_types: string[] = ['Bedroom', 'Bathroom', 'Kitchen', 'Living Room'];
+  calculatorService: InteriorCalculatorService = new InteriorCalculatorService;
+  totalSum: any = null;
 
   constructor(private fb: FormBuilder) { }
 
@@ -126,11 +115,19 @@ export class IntPaintEstimateComponent implements OnInit {
   }
 
   remove(room: Room): void {
+    let roomTotal = this.calculatorService.calcRoom(room);
+
     const index = this.roomz.indexOf(room);
 
     this.chipCountMap.get(room.roomPicked).delete(room.roomCount);
 
     if (index >= 0) this.roomz.splice(index, 1);
+
+    if(this.roomz.length<1) {
+      this.totalSum = null
+    } else {
+      this.totalSum -= roomTotal;
+    }
   }
 
   edit(room: Room): void {
@@ -166,6 +163,9 @@ export class IntPaintEstimateComponent implements OnInit {
   }
 
   calculate() {
-    console.log('itssa me mario!')
+    this.totalSum = this.calculatorService.calculateRoomz(this.roomz)
+    //add current room value when form is valid: will also show warning if form is invalid
+    //possibly make totalSum dynamic so they alwayse see the running total
+    //and turn calculate button into Build Report, with detailed view of costs
   }
 }
