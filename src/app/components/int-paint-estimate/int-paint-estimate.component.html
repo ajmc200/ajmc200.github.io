@@ -140,8 +140,8 @@
     </div>
   </div>
 
-  <div>
-    <h2 style="display: inline; margin-left: 38%;">Your Rooms: </h2>
+  <div style="display: flex; justify-content: center;">
+    <h2 style="display: inline;">Your Rooms: </h2>
   </div>
 
   <mat-chip-list #chipList aria-label="Fruit selection">
@@ -155,8 +155,8 @@
     </mat-chip>
   </mat-chip-list>
 
-  <div class="bottom-bar">
-    <button class="calc-button" mat-raised-button (click)="calculate()">Calculate</button>
+  <div class="bottom-bar" style="justify-content: center;">
+    <button class="calc-button" mat-raised-button (click)="calculate()">Generate Report</button>
   </div>
 
   <div *ngIf="totalSum && roomz">

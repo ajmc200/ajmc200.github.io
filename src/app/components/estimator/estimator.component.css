@@ -1,12 +1,15 @@
 .example-accordion {
     display: block;
     max-width: 500px;
-    margin-top: 60px;
+    margin-top: 80px;
   }
   
   .example-accordion-item {
     display: block;
     border: solid 1px #ccc;
+    border-radius: 8px;
+    margin: 5px;
+    box-shadow: 3px 4px 8px 0px #888888;
   }
   
   .example-accordion-item + .example-accordion-item {
