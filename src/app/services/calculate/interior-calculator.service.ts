@@ -21,11 +21,12 @@ export class InteriorCalculatorService {
   }
 
   calcRoom(room: Room): number {
-    let wallSurfaceArea = Math.sqrt(room.sizePicked)*4*10;
+    let sizePicked = room.length*room.width;
+    let wallSurfaceArea = (room.length*room.height*2) + (room.width*room.height*2);
 
-    let _painters = (Math.ceil(room.sizePicked/200)>3) ? 4 : Math.ceil(room.sizePicked/200); //1 painter/(200ft^2)
+    let _painters = (Math.ceil(sizePicked/200)>3) ? 4 : Math.ceil(sizePicked/200); //1 painter/(200ft^2)
     let _painterWage = 20;
-    let hours = (room.sizePicked/_painters)*0.02; // size/painters * 0.02 = 4hr...
+    let hours = (sizePicked/_painters)*0.02; // size/painters * 0.02 = 4hr...
 
     let laborCosts = _painters * (_painterWage * hours); // painters * (painterWage * hours)
 

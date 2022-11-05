@@ -36,7 +36,9 @@ export class IntPaintEstimateComponent implements OnInit {
   roomDetailsForm = this.fb.group({
     customName: [''],
     roomPicked: [''],
-    sizePicked: [''],
+    length: [''],
+    width: [''],
+    height: [''],
     conditionPicked: [''],
 
     roomFeaturesForm: this.fb.group({
@@ -76,6 +78,7 @@ export class IntPaintEstimateComponent implements OnInit {
 
   addRoom() {
     this.visible = true;
+    this.layoutsToggle = false;
     this.editThisRoom = null;
   }
 
@@ -85,6 +88,7 @@ export class IntPaintEstimateComponent implements OnInit {
   submit() {
     this.add();
     this.visible = false;
+    this.layoutsToggle = false;
   }
 
   add(): void {
@@ -101,7 +105,9 @@ export class IntPaintEstimateComponent implements OnInit {
       customName     : customName, 
       roomCount      : roomCount, 
       roomPicked     : this.roomDetailsForm.get('roomPicked')?.value, 
-      sizePicked     : this.roomDetailsForm.get('sizePicked')?.value,
+      length         : this.roomDetailsForm.get('length')?.value,
+      width          : this.roomDetailsForm.get('width')?.value,
+      height         : this.roomDetailsForm.get('height')?.value,
       conditionPicked: this.roomDetailsForm.get('conditionPicked')?.value,
       walls          : this.roomDetailsForm.controls['roomFeaturesForm'].get('walls')?.value,
       ceiling        : this.roomDetailsForm.controls['roomFeaturesForm'].get('ceiling')?.value,
@@ -135,7 +141,9 @@ export class IntPaintEstimateComponent implements OnInit {
 
     this.roomDetailsForm.controls['customName'].setValue(room.customName);
     this.roomDetailsForm.controls['roomPicked'].setValue(room.roomPicked);
-    this.roomDetailsForm.controls['sizePicked'].setValue(room.sizePicked);
+    this.roomDetailsForm.controls['length'].setValue(room.length);
+    this.roomDetailsForm.controls['width'].setValue(room.width);
+    this.roomDetailsForm.controls['height'].setValue(room.height);
     this.roomDetailsForm.controls['conditionPicked'].setValue(room.conditionPicked);
     this.roomDetailsForm.controls['roomFeaturesForm'].get('walls')?.setValue(room.walls);
     this.roomDetailsForm.controls['roomFeaturesForm'].get('ceiling')?.setValue(room.ceiling);
@@ -167,5 +175,9 @@ export class IntPaintEstimateComponent implements OnInit {
     //add current room value when form is valid: will also show warning if form is invalid
     //possibly make totalSum dynamic so they alwayse see the running total
     //and turn calculate button into Build Report, with detailed view of costs
+  }
+
+  Round(val: number): number {
+    return Math.round(val);
   }
 }

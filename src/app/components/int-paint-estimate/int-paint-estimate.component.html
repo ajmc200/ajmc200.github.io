@@ -33,25 +33,65 @@
     </mat-step>
 
     <mat-step label="">
-      <div  class="center-text">
-      <h3>Select an image that closely matches your room.</h3>
-      <h2>OR</h2>
-      <h3>If you know the dimensions of your room</h3> <button (click)="dimensions()">Insert Dimensions</button>
+      <div *ngIf="!layoutsToggle" style="margin-bottom: 10px;">
+        <h3>What are the dimensions of the room?</h3>
       </div>
-      <div *ngFor="let swiper_comp of roomLayouts">
-        <div class="swipers-container" *ngIf="swiper_comp.name == roomDetailsForm.get('roomPicked')?.value">
-          <swiper #swiper class='swiper' [config]="config">
-            <ng-template *ngFor="let picture of swiper_comp.pictures" swiperSlide> 
-              <input #radioButton name="sizePicked" type="radio" id="cb{{picture.picture}}" formControlName="sizePicked" [value]="picture.size" [checked]=false/>
-              <label for="cb{{picture.picture}}"> <img class="swiper-pic" src={{picture.picture}}> </label>
-            </ng-template>
-          </swiper>
+
+      <div class="center-text" *ngIf="layoutsToggle" style="display: flex; margin-top: 10px; flex-direction: column;">
+        <h3>Select an image or input room dimensions.</h3>
+        <div style="display: flex; justify-content:center">
+          <button (click)="layoutsToggle=!layoutsToggle">Input Dimensions</button>
         </div>
       </div>
 
-      <div class="swiper-navigation" *ngIf="roomDetailsForm.get('roomPicked')?.value">
-        <button class="swiper-button before" (click)="slidePrev()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"/></svg> </button>
-        <button class="swiper-button next" (click)="slideNext()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg> </button>
+      <div *ngIf="!layoutsToggle" style="display: flex; flex-direction:column; max-width: 200px;">
+        <div style="display: flex; align-items:baseline; gap: 5px;">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Length</mat-label>
+            <input formControlName="length" type="number" matInput #postalCode maxlength="5" placeholder="Ex. 12">
+          </mat-form-field>
+          <span>ft.</span>
+        </div>
+        <div style="display: flex; align-items:baseline; gap: 5px;">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Width</mat-label>
+            <input formControlName="width" type="number" matInput #postalCode maxlength="5" placeholder="Ex. 15">
+          </mat-form-field>
+          <span>ft.</span>
+        </div>
+        <div style="display: flex; align-items:baseline; gap: 5px;">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Height</mat-label>
+            <input formControlName="height" type="number" matInput #postalCode maxlength="5" placeholder="Ex. 9">
+          </mat-form-field>
+          <span>ft.</span>
+        </div>
+      </div>
+
+      <div *ngIf="layoutsToggle">
+        <div *ngFor="let swiper_comp of roomLayouts">
+          <div class="swipers-container" *ngIf="swiper_comp.name == roomDetailsForm.get('roomPicked')?.value">
+            <swiper #swiper class='swiper' [config]="config">
+              <ng-template *ngFor="let picture of swiper_comp.pictures" swiperSlide> 
+                <span>{{Round(picture.L * picture.W)}} sq. ft.</span>
+                <input #radioButton name="length" type="radio" id="cb{{picture.picture}}" formControlName="length" [value]="picture.L * picture.W" [checked]=false/>
+                <label for="cb{{picture.picture}}"> <img class="swiper-pic" src={{picture.picture}}> </label>
+              </ng-template>
+            </swiper>
+          </div>
+        </div>
+
+        <div class="swiper-navigation" *ngIf="roomDetailsForm.get('roomPicked')?.value">
+          <button class="swiper-button before" (click)="slidePrev()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"/></svg> </button>
+          <button class="swiper-button next" (click)="slideNext()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg> </button>
+        </div>
+      </div>
+
+      <div class="center-text" *ngIf="!layoutsToggle" style="display: flex; margin-top: 10px; flex-direction: column;">
+        <h3>Or choose a room size from a selection of images.</h3>
+        <div style="display: flex; justify-content:center">
+          <button (click)="layoutsToggle=!layoutsToggle">Select Image</button>
+        </div>
       </div>
 
       <div>

@@ -1,7 +1,9 @@
 
 export interface ILayout {
     picture: string,
-    size: number
+    L: number,
+    W: number,
+    H: number
 }
 
 export interface ILayouts {
