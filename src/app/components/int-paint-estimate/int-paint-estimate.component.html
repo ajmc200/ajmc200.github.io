@@ -33,18 +33,11 @@
     </mat-step>
 
     <mat-step label="">
-      <div *ngIf="!layoutsToggle" style="margin-bottom: 10px;">
+      <div style="margin-bottom: 10px;">
         <h3>What are the dimensions of the room?</h3>
       </div>
 
-      <div class="center-text" *ngIf="layoutsToggle" style="display: flex; margin-top: 10px; flex-direction: column;">
-        <h3>Select an image or input room dimensions.</h3>
-        <div style="display: flex; justify-content:center">
-          <button (click)="layoutsToggle=!layoutsToggle">Input Dimensions</button>
-        </div>
-      </div>
-
-      <div *ngIf="!layoutsToggle" style="display: flex; flex-direction:column; max-width: 200px;">
+      <div style="display: flex; flex-direction:column; max-width: 200px;">
         <div style="display: flex; align-items:baseline; gap: 5px;">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Length</mat-label>
@@ -68,13 +61,20 @@
         </div>
       </div>
 
+      <div class="center-text" *ngIf="layoutsToggle" style="display: flex; margin-top: 10px; flex-direction: column;">
+        <h3>Select an image or input room dimensions.</h3>
+        <div style="display: flex; justify-content:center">
+          <button (click)="layoutsToggle=!layoutsToggle">Hide</button>
+        </div>
+      </div>
+
       <div *ngIf="layoutsToggle">
         <div *ngFor="let swiper_comp of roomLayouts">
           <div class="swipers-container" *ngIf="swiper_comp.name == roomDetailsForm.get('roomPicked')?.value">
             <swiper #swiper class='swiper' [config]="config">
               <ng-template *ngFor="let picture of swiper_comp.pictures" swiperSlide> 
                 <span>{{Round(picture.L * picture.W)}} sq. ft.</span>
-                <input #radioButton name="length" type="radio" id="cb{{picture.picture}}" formControlName="length" [value]="picture.L * picture.W" [checked]=false/>
+                <input #radioButton name="length" type="radio" id="cb{{picture.picture}}" [(ngModel)] = "selectedImage" [ngModelOptions]="{standalone: true}" [value]="[picture.L, picture.W, picture.H]" (click)="imageSelected(picture.L, picture.W, picture.H)" [checked]=false/>
                 <label for="cb{{picture.picture}}"> <img class="swiper-pic" src={{picture.picture}}> </label>
               </ng-template>
             </swiper>
@@ -90,7 +90,7 @@
       <div class="center-text" *ngIf="!layoutsToggle" style="display: flex; margin-top: 10px; flex-direction: column;">
         <h3>Or choose a room size from a selection of images.</h3>
         <div style="display: flex; justify-content:center">
-          <button (click)="layoutsToggle=!layoutsToggle">Select Image</button>
+          <button (click)="layoutsToggle=!layoutsToggle">Show Images</button>
         </div>
       </div>
 

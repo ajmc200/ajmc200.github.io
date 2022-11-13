@@ -30,6 +30,7 @@ export class IntPaintEstimateComponent implements OnInit {
   room_types: string[] = ['Bedroom', 'Bathroom', 'Kitchen', 'Living Room'];
   calculatorService: InteriorCalculatorService = new InteriorCalculatorService;
   totalSum: any = null;
+  selectedImage!: number[];
 
   constructor(private fb: FormBuilder) { }
 
@@ -154,6 +155,7 @@ export class IntPaintEstimateComponent implements OnInit {
     this.roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')?.setValue(room.doorsQuantity);
 
     this.visible = true;
+    this.layoutsToggle = false;
   }
 
   save() {
@@ -179,5 +181,13 @@ export class IntPaintEstimateComponent implements OnInit {
 
   Round(val: number): number {
     return Math.round(val);
+  }
+
+  imageSelected(L:number, W:number, H:number): number {
+    this.roomDetailsForm.controls['length'].setValue(L);
+    this.roomDetailsForm.controls['width'].setValue(W);
+    this.roomDetailsForm.controls['height'].setValue(H);
+
+    return Math.round(L*W*H);
   }
 }
