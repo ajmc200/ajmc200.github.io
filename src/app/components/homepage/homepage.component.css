@@ -1,11 +1,12 @@
 /*General styles*/
 *{
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
-body {
+p {
     font-size: 1.3125rem;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 section {
@@ -30,8 +31,14 @@ section {
     font-weight: 500;
 }
 
+/*media query: override .grid margin && ajust section padding --> ~.5rem*/
+
 hr.solid {
     border-top: 3px solid #bbb;
+}
+
+.text-paragraph-format{
+    padding: 1rem;
 }
 
 /**/
@@ -68,6 +75,8 @@ hr.solid {
 
 .card-content-container {
     position: relative;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .card-detail {
@@ -75,6 +84,7 @@ hr.solid {
     position: absolute;
     bottom: 0%;
     width: 100%;
+    padding: 0.5rem;
     background: linear-gradient(90deg,rgba(0,25,50,.8) 40%,rgba(0,25,50,.2) 100%);
 }
 
@@ -83,6 +93,7 @@ hr.solid {
     color: white;
     font-weight:lighter;
     line-height: 1;
+    font-size: 1.15rem;
 }
 
 .inside-left {
@@ -133,5 +144,13 @@ hr.solid {
 @media screen and (max-width: 600px) {
     .pic-container{
         margin-top: 60px;
+    }
+
+    .cards-container {
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%;
     }
 }
