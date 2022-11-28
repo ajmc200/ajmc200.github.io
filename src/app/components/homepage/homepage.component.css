@@ -18,9 +18,13 @@ section {
 
 .grid {
     margin-inline: auto;
-    margin-top: 50px;
+    margin-top: 15px;
     width: min(90%, 70.5rem);
     font-size: 1.3125rem;
+}
+
+h1 {
+    padding-top: 10px;
 }
 
 .text-center {

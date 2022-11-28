@@ -21,6 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatChipsModule} from '@angular/material/chips';
     NavBarComponent,
     HomepageComponent,
     EstimatorComponent,
-    IntPaintEstimateComponent
+    IntPaintEstimateComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
