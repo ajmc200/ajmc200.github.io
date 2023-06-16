@@ -1,43 +1,44 @@
 <!-- Navbar -->
 
-<span class = "bossdiv">
-    <div class='nav-container'>
+<span class="bossdiv">
+  <div class="nav-container">
+    <nav class="link-flex-content">
+      <a (click)="toggle()">
+        <img class="menu-icon" src="../../../assets/menu-bars-white.png" />
+      </a>
+      <!---->
+      <ul class="nav__links">
+        <li><a href="#home">Home</a></li>
 
-        <nav class="link-flex-content">
+        <li><a href="#about">About</a></li>
 
-            <a (click)="toggle()"> <img class="menu-icon" src="../../../assets/menu-bars-white.png"> </a>
-            <!---->
-            <ul class='nav__links'>
-                <li><a href="#home">Home</a></li>
-                    
-                <li ><a href="#about">About</a></li>
-                    
-                <li ><a routerLink="gallery">Gallery</a></li>
-            </ul>
-            
-        </nav>
+        <li><a routerLink="gallery">Gallery</a></li>
+      </ul>
+    </nav>
 
-        <div class="logo-container">
-            <a routerLink="/" (click)="isOpen = false"> <img class='logo' src='../../../assets/logo_white_letters.png' alt='logo'> </a>
-        </div>
-
-        <a class='cta' href='#'>
-            <div class='cta' id="contact-info">
-                <span class="material-icons md-18 phone-icon">call</span>
-                <span id="number">(770)-316-2965</span>
-            </div>
-        </a>
-
+    <div class="logo-container">
+      <a routerLink="/" (click)="isOpen = false">
+        <img
+          class="logo"
+          src="../../../assets/logo_white_letters.png"
+          alt="logo"
+        />
+      </a>
     </div>
 
+    <a class="cta" href="#">
+      <div class="cta" id="contact-info">
+        <span class="material-icons md-18 phone-icon">call</span>
+        <span id="number">(770)-316-2965</span>
+      </div>
+    </a>
+  </div>
 </span>
 
 <div [@openClose]="isOpen ? 'open' : 'closed'" class="box">
+  <a href="#home" (click)="toggle()">Home</a>
 
-    <a  href="#home" (click)="toggle()">Home</a>
-            
-    <a  href="#about" (click)="toggle()">About</a>
-            
-    <a  routerLink="gallery" (click)="toggle()">Gallery</a>
+  <a href="#about" (click)="toggle()">About</a>
 
+  <a routerLink="gallery" (click)="toggle()">Gallery</a>
 </div>

@@ -1,23 +1,28 @@
-import { AfterContentChecked, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import Swiper, { SwiperOptions, Pagination } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css'],
 })
 export class HomepageComponent implements OnInit, AfterContentChecked {
-  @ViewChild('swiper')swiper!: SwiperComponent;
+  @ViewChild('swiper') swiper!: SwiperComponent;
 
   public config: SwiperOptions = {
-    pagination: true
-  }
+    pagination: true,
+  };
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    Swiper.use([Pagination])
+    Swiper.use([Pagination]);
   }
 
   ngAfterContentChecked() {
@@ -25,5 +30,4 @@ export class HomepageComponent implements OnInit, AfterContentChecked {
       this.swiper.updateSwiper({});
     }
   }
-
 }
