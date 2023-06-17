@@ -1,7 +1,7 @@
 import { ViewChild, Component, OnInit } from '@angular/core';
 import Swiper, { SwiperOptions, Pagination, Navigation } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
-import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {UntypedFormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { ROOMLAYOUTS } from 'src/app/services/room-layouts'; 
@@ -32,7 +32,7 @@ export class IntPaintEstimateComponent implements OnInit {
   totalSum: any = null;
   selectedImage!: number[];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: UntypedFormBuilder) { }
 
   roomDetailsForm = this.fb.group({
     customName: [''],
