@@ -1,73 +1,123 @@
 <div class="component-container">
+  <button
+    class="add-button"
+    mat-raised-button
+    (click)="addRoom()"
+    *ngIf="!visible"
+  >
+    Add Room
+  </button>
 
-  <button class="add-button" mat-raised-button (click)="addRoom()" *ngIf="!visible">Add Room</button>
-
-  <mat-horizontal-stepper class="stepper-comp" *ngIf="visible" [formGroup]="roomDetailsForm">
+  <mat-horizontal-stepper
+    class="stepper-comp"
+    *ngIf="visible"
+    [formGroup]="roomDetailsForm"
+  >
     <mat-step label="">
-      <label class="radio-label"><h3>What kind of room do you need painted?</h3></label>
-      <div [formGroup] = roomDetailsForm>
+      <label class="radio-label"
+        ><h3>What kind of room do you need painted?</h3></label
+      >
+      <div [formGroup]="roomDetailsForm">
         <mat-form-field appearance="fill">
           <mat-label>Room Name: (Optional)</mat-label>
-          <input 
-            matInput type="text" formControlName="customName" 
+          <input
+            matInput
+            type="text"
+            formControlName="customName"
             placeholder="ex. Master Bedroom"
             value="{{
-            (this.roomDetailsForm.get('customName')?.value && this.roomDetailsForm.get('customName')?.value != '') 
-              ? this.roomDetailsForm.get('customName')?.value
-              : ''
+              this.roomDetailsForm.get('customName')?.value &&
+              this.roomDetailsForm.get('customName')?.value != ''
+                ? this.roomDetailsForm.get('customName')?.value
+                : ''
             }}"
-          >
+          />
           <mat-error>Min amount: 1</mat-error>
         </mat-form-field>
       </div>
-      <mat-radio-group class="example-radio-group" formControlName="roomPicked" required>
-        <mat-radio-button class="example-radio-button" *ngFor="let room_type of room_types" [value]="room_type">
-          {{room_type}}
-        </mat-radio-button> 
+      <mat-radio-group
+        class="example-radio-group"
+        formControlName="roomPicked"
+        required
+      >
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let room_type of room_types"
+          [value]="room_type"
+        >
+          {{ room_type }}
+        </mat-radio-button>
       </mat-radio-group>
 
       <div>
-        <button mat-button matStepperPrevious (click)="!visible = false">Back</button>
+        <button mat-button matStepperPrevious (click)="!(visible = false)">
+          Back
+        </button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
 
     <mat-step label="">
-      <div style="margin-bottom: 10px;">
+      <div style="margin-bottom: 10px">
         <h3>What are the dimensions of the room?</h3>
       </div>
 
-      <div style="display: flex; flex-direction:column; max-width: 200px;">
-        <div style="display: flex; align-items:baseline; gap: 5px;">
+      <div style="display: flex; flex-direction: column; max-width: 200px">
+        <div style="display: flex; align-items: baseline; gap: 5px">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Length</mat-label>
-            <input formControlName="length" type="number" matInput #postalCode maxlength="5" placeholder="Ex. 12">
+            <input
+              formControlName="length"
+              type="number"
+              matInput
+              #postalCode
+              maxlength="5"
+              placeholder="Ex. 12"
+            />
           </mat-form-field>
           <span>ft.</span>
         </div>
-        <div style="display: flex; align-items:baseline; gap: 5px;">
+        <div style="display: flex; align-items: baseline; gap: 5px">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Width</mat-label>
-            <input formControlName="width" type="number" matInput #postalCode maxlength="5" placeholder="Ex. 15">
+            <input
+              formControlName="width"
+              type="number"
+              matInput
+              #postalCode
+              maxlength="5"
+              placeholder="Ex. 15"
+            />
           </mat-form-field>
           <span>ft.</span>
         </div>
-        <div style="display: flex; align-items:baseline; gap: 5px;">
+        <div style="display: flex; align-items: baseline; gap: 5px">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Height</mat-label>
-            <input formControlName="height" type="number" matInput #postalCode maxlength="5" placeholder="Ex. 9">
+            <input
+              formControlName="height"
+              type="number"
+              matInput
+              #postalCode
+              maxlength="5"
+              placeholder="Ex. 9"
+            />
           </mat-form-field>
           <span>ft.</span>
         </div>
       </div>
 
-      <div class="center-text" *ngIf="layoutsToggle" style="display: flex; margin-top: 10px; flex-direction: column;">
+      <div
+        class="center-text"
+        *ngIf="layoutsToggle"
+        style="display: flex; margin-top: 10px; flex-direction: column"
+      >
         <h3>Select an image or input room dimensions.</h3>
-        <div style="display: flex; justify-content:center">
-          <button (click)="layoutsToggle=!layoutsToggle">Hide</button>
+        <div style="display: flex; justify-content: center">
+          <button (click)="layoutsToggle = !layoutsToggle">Hide</button>
         </div>
       </div>
-
+      <!--
       <div *ngIf="layoutsToggle">
         <div *ngFor="let swiper_comp of roomLayouts">
           <div class="swipers-container" *ngIf="swiper_comp.name == roomDetailsForm.get('roomPicked')?.value">
@@ -86,11 +136,15 @@
           <button class="swiper-button next" (click)="slideNext()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg> </button>
         </div>
       </div>
-
-      <div class="center-text" *ngIf="!layoutsToggle" style="display: flex; margin-top: 10px; flex-direction: column;">
+    -->
+      <div
+        class="center-text"
+        *ngIf="!layoutsToggle"
+        style="display: flex; margin-top: 10px; flex-direction: column"
+      >
         <h3>Or choose a room size from a selection of images.</h3>
-        <div style="display: flex; justify-content:center">
-          <button (click)="layoutsToggle=!layoutsToggle">Show Images</button>
+        <div style="display: flex; justify-content: center">
+          <button (click)="layoutsToggle = !layoutsToggle">Show Images</button>
         </div>
       </div>
 
@@ -105,27 +159,49 @@
 
       <section class="example-section" formGroupName="roomFeaturesForm">
         <h4>Select all that apply:</h4>
-        <p><mat-checkbox formControlName="walls">Walls</mat-checkbox></p> 
+        <p><mat-checkbox formControlName="walls">Walls</mat-checkbox></p>
         <p><mat-checkbox formControlName="ceiling">Ceiling</mat-checkbox></p>
         <p><mat-checkbox formControlName="trim">Trim/Moulding</mat-checkbox></p>
         <p>
           <mat-checkbox formControlName="windows">Windows</mat-checkbox>
-          <mat-form-field appearance="fill" *ngIf="roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.value">
+          <mat-form-field
+            appearance="fill"
+            *ngIf="
+              roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.value
+            "
+          >
             <mat-label>Quantity</mat-label>
-            <input matInput type="number" formControlName="windowsQuantity" placeholder="Ex. 2" min="1">
+            <input
+              matInput
+              type="number"
+              formControlName="windowsQuantity"
+              placeholder="Ex. 2"
+              min="1"
+            />
             <mat-error>Min amount: 1</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-checkbox formControlName="doors">Door(s)</mat-checkbox>
-          <mat-form-field appearance="fill" *ngIf="roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.value">
+          <mat-form-field
+            appearance="fill"
+            *ngIf="
+              roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.value
+            "
+          >
             <mat-label>Quantity</mat-label>
-            <input matInput type="number" formControlName="doorsQuantity" placeholder="Ex. 2" min="1">
+            <input
+              matInput
+              type="number"
+              formControlName="doorsQuantity"
+              placeholder="Ex. 2"
+              min="1"
+            />
             <mat-error>Min amount: 1</mat-error>
           </mat-form-field>
         </p>
       </section>
-      
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -133,78 +209,126 @@
     </mat-step>
 
     <mat-step>
-      <label class="radio-label"><h3>What condition are the walls in?</h3></label>
-      <mat-radio-group class="example-radio-group" aria-labelledby="example-radio-group-label" formControlName="conditionPicked" required>
-        <mat-radio-button class="radio-button-long example-radio-button" [value]="'new'">
+      <label class="radio-label"
+        ><h3>What condition are the walls in?</h3></label
+      >
+      <mat-radio-group
+        class="example-radio-group"
+        aria-labelledby="example-radio-group-label"
+        formControlName="conditionPicked"
+        required
+      >
+        <mat-radio-button
+          class="radio-button-long example-radio-button"
+          [value]="'new'"
+        >
           <span class="radio-content">
             New: newly installed drywall, no damages, prep needed
           </span>
-        </mat-radio-button> 
-        <mat-radio-button class="radio-button-long example-radio-button" [value]="'good'">
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button-long example-radio-button"
+          [value]="'good'"
+        >
           <span class="radio-content">
             Good: minor scratches or chips, no stains, little prep needed
           </span>
-        </mat-radio-button> 
-        <mat-radio-button class="radio-button-long example-radio-button" [value]="'moderate'">
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button-long example-radio-button"
+          [value]="'moderate'"
+        >
           <span class="radio-content">
-            Moderate: some scratches and minor holes, <br> little to no stains, prep needed
+            Moderate: some scratches and minor holes, <br />
+            little to no stains, prep needed
           </span>
-        </mat-radio-button> 
-        <mat-radio-button class="radio-button-long example-radio-button" [value]="'damaged'">
+        </mat-radio-button>
+        <mat-radio-button
+          class="radio-button-long example-radio-button"
+          [value]="'damaged'"
+        >
           <span class="radio-content">
-            Damaged: deep scratches, holes that need patching, some stains, prep needed
+            Damaged: deep scratches, holes that need patching, some stains, prep
+            needed
           </span>
-        </mat-radio-button> 
+        </mat-radio-button>
       </mat-radio-group>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="submit(); roomDetailsForm.reset()" *ngIf="editThisRoom == null">Done</button>
-        <button mat-button (click)="save(); roomDetailsForm.reset()" *ngIf="editThisRoom != null">Save</button>
+        <button
+          mat-button
+          (click)="submit(); roomDetailsForm.reset()"
+          *ngIf="editThisRoom == null"
+        >
+          Done
+        </button>
+        <button
+          mat-button
+          (click)="save(); roomDetailsForm.reset()"
+          *ngIf="editThisRoom != null"
+        >
+          Save
+        </button>
       </div>
     </mat-step>
-  </mat-horizontal-stepper>  
+  </mat-horizontal-stepper>
 
   <div class="bottom-bar" *ngIf="visible">
     <div>
       <div class="bottom-buttons">
-        <button mat-raised-button (click)="save(); roomDetailsForm.reset()" *ngIf="editThisRoom">
+        <button
+          mat-raised-button
+          (click)="save(); roomDetailsForm.reset()"
+          *ngIf="editThisRoom"
+        >
           Save
         </button>
-        <button mat-raised-button (click)="submit(); roomDetailsForm.reset()" *ngIf="!editThisRoom && roomDetailsForm.valid">
+        <button
+          mat-raised-button
+          (click)="submit(); roomDetailsForm.reset()"
+          *ngIf="!editThisRoom && roomDetailsForm.valid"
+        >
           Done
         </button>
-        <button mat-raised-button (click)="!visible = false; roomDetailsForm.reset()">
+        <button
+          mat-raised-button
+          (click)="!(visible = false); roomDetailsForm.reset()"
+        >
           Cancel
         </button>
       </div>
     </div>
   </div>
 
-  <div style="display: flex; justify-content: center;">
-    <h2 style="display: inline;">Your Rooms: </h2>
+  <div style="display: flex; justify-content: center">
+    <h2 style="display: inline">Your Rooms:</h2>
   </div>
-
+  <!--
   <mat-chip-list #chipList aria-label="Fruit selection">
-    <h3 style="display: inline;" *ngIf="roomz.length < 1"><i>Empty</i></h3>
-    <mat-chip *ngFor="let room of roomz" (removed)="remove(room)" (click)="edit(room)">
+    <h3 style="display: inline" *ngIf="roomz.length < 1"><i>Empty</i></h3>
+    <mat-chip
+      *ngFor="let room of roomz"
+      (removed)="remove(room)"
+      (click)="edit(room)"
+    >
       <mat-icon>edit</mat-icon>
-      - {{room.customName}} -
+      - {{ room.customName }} -
       <button matChipRemove>
         <mat-icon>cancel</mat-icon>
       </button>
     </mat-chip>
   </mat-chip-list>
-
-  <div class="bottom-bar" style="justify-content: center;">
-    <button class="calc-button" mat-raised-button (click)="calculate()">Generate Report</button>
+-->
+  <div class="bottom-bar" style="justify-content: center">
+    <button class="calc-button" mat-raised-button (click)="calculate()">
+      Generate Report
+    </button>
   </div>
 
   <div *ngIf="totalSum && roomz">
     <div>
-      <h2 style="display: inline; margin-left: 44%;">Report: </h2>
+      <h2 style="display: inline; margin-left: 44%">Report:</h2>
     </div>
-    <div>${{totalSum}}</div>
+    <div>${{ totalSum }}</div>
   </div>
-  
-
 </div>

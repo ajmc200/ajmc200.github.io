@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SwiperModule } from 'swiper/angular';
 import { EstimatorComponent } from './components/estimator/estimator.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { IntPaintEstimateComponent } from './components/int-paint-estimate/int-paint-estimate.component';
@@ -25,6 +24,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     NavBarComponent,
@@ -39,7 +39,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    SwiperModule,
     CdkAccordionModule,
     MatIconModule,
     MatStepperModule,

@@ -1,25 +1,23 @@
 import { ViewChild, Component, OnInit } from '@angular/core';
-import Swiper, { SwiperOptions, Pagination, Navigation } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
-import {UntypedFormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { ROOMLAYOUTS } from 'src/app/services/room-layouts'; 
+
+import {
+  UntypedFormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ROOMLAYOUTS } from 'src/app/services/room-layouts';
 import { Room } from '../../services/room';
 import { InteriorCalculatorService } from '../../services/calculate/interior-calculator.service';
 
 @Component({
   selector: 'app-int-paint-estimate',
   templateUrl: './int-paint-estimate.component.html',
-  styleUrls: ['./int-paint-estimate.component.css']
+  styleUrls: ['./int-paint-estimate.component.css'],
 })
 export class IntPaintEstimateComponent implements OnInit {
-  @ViewChild('swiper') swiper?: SwiperComponent;
-
-  public config: SwiperOptions = {
-    pagination: { type: 'fraction' }
-  }
-
   roomLayouts = ROOMLAYOUTS;
 
   visible = false;
@@ -28,11 +26,12 @@ export class IntPaintEstimateComponent implements OnInit {
   editThisRoom: any = null; //holds oldRoom to edit/update
 
   room_types: string[] = ['Bedroom', 'Bathroom', 'Kitchen', 'Living Room'];
-  calculatorService: InteriorCalculatorService = new InteriorCalculatorService;
+  calculatorService: InteriorCalculatorService =
+    new InteriorCalculatorService();
   totalSum: any = null;
   selectedImage!: number[];
 
-  constructor(private fb: UntypedFormBuilder) { }
+  constructor(private fb: UntypedFormBuilder) {}
 
   roomDetailsForm = this.fb.group({
     customName: [''],
@@ -50,7 +49,7 @@ export class IntPaintEstimateComponent implements OnInit {
       doors: [false],
       windowsQuantity: [],
       doorsQuantity: [],
-    })
+    }),
   });
 
   addOnBlur = true;
@@ -58,24 +57,13 @@ export class IntPaintEstimateComponent implements OnInit {
   roomz: Room[] = [];
 
   chipCountMap: any = new Map<string, Set<number>>([
-    ["Bedroom",new Set<number>([0])],
-    ["Bathroom",new Set<number>([0])],
-    ["Kitchen",new Set<number>([0])],
-    ["Living Room",new Set<number>([0])]
+    ['Bedroom', new Set<number>([0])],
+    ['Bathroom', new Set<number>([0])],
+    ['Kitchen', new Set<number>([0])],
+    ['Living Room', new Set<number>([0])],
   ]);
-  
 
-  ngOnInit() {
-    Swiper.use([Navigation, Pagination])
-  }
-
-  //swipe manipulation
-  slideNext() {
-    this.swiper?.swiperRef.slideNext(100);
-  }
-  slidePrev() {
-    this.swiper?.swiperRef.slidePrev(100);
-  }
+  ngOnInit() {}
 
   addRoom() {
     this.visible = true;
@@ -83,8 +71,7 @@ export class IntPaintEstimateComponent implements OnInit {
     this.editThisRoom = null;
   }
 
-  dimensions() {
-  }
+  dimensions() {}
 
   submit() {
     this.add();
@@ -94,31 +81,44 @@ export class IntPaintEstimateComponent implements OnInit {
 
   add(): void {
     let roomCount = 1;
-    let roomCountArray = this.chipCountMap.get(this.roomDetailsForm.get('roomPicked')?.value);
-    while(roomCountArray.has(roomCount)) roomCount++;
+    let roomCountArray = this.chipCountMap.get(
+      this.roomDetailsForm.get('roomPicked')?.value
+    );
+    while (roomCountArray.has(roomCount)) roomCount++;
     roomCountArray.add(roomCount);
 
-    const customName = (this.roomDetailsForm.get('customName')?.value == '' || this.roomDetailsForm.get('customName')?.value == null) 
-      ? this.roomDetailsForm.get('roomPicked')?.value+' '+roomCount 
-      : this.roomDetailsForm.get('customName')?.value
+    const customName =
+      this.roomDetailsForm.get('customName')?.value == '' ||
+      this.roomDetailsForm.get('customName')?.value == null
+        ? this.roomDetailsForm.get('roomPicked')?.value + ' ' + roomCount
+        : this.roomDetailsForm.get('customName')?.value;
 
     this.roomz.push({
-      customName     : customName, 
-      roomCount      : roomCount, 
-      roomPicked     : this.roomDetailsForm.get('roomPicked')?.value, 
-      length         : this.roomDetailsForm.get('length')?.value,
-      width          : this.roomDetailsForm.get('width')?.value,
-      height         : this.roomDetailsForm.get('height')?.value,
+      customName: customName,
+      roomCount: roomCount,
+      roomPicked: this.roomDetailsForm.get('roomPicked')?.value,
+      length: this.roomDetailsForm.get('length')?.value,
+      width: this.roomDetailsForm.get('width')?.value,
+      height: this.roomDetailsForm.get('height')?.value,
       conditionPicked: this.roomDetailsForm.get('conditionPicked')?.value,
-      walls          : this.roomDetailsForm.controls['roomFeaturesForm'].get('walls')?.value,
-      ceiling        : this.roomDetailsForm.controls['roomFeaturesForm'].get('ceiling')?.value,
-      trim           : this.roomDetailsForm.controls['roomFeaturesForm'].get('trim')?.value,
-      windows        : this.roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.value,
-      doors          : this.roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.value,
-      windowsQuantity: this.roomDetailsForm.controls['roomFeaturesForm'].get('windowsQuantity')?.value,
-      doorsQuantity  : this.roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')?.value,
+      walls:
+        this.roomDetailsForm.controls['roomFeaturesForm'].get('walls')?.value,
+      ceiling:
+        this.roomDetailsForm.controls['roomFeaturesForm'].get('ceiling')?.value,
+      trim: this.roomDetailsForm.controls['roomFeaturesForm'].get('trim')
+        ?.value,
+      windows:
+        this.roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.value,
+      doors:
+        this.roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.value,
+      windowsQuantity:
+        this.roomDetailsForm.controls['roomFeaturesForm'].get('windowsQuantity')
+          ?.value,
+      doorsQuantity:
+        this.roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')
+          ?.value,
     });
-    console.log(this.roomz)
+    console.log(this.roomz);
   }
 
   remove(room: Room): void {
@@ -130,8 +130,8 @@ export class IntPaintEstimateComponent implements OnInit {
 
     if (index >= 0) this.roomz.splice(index, 1);
 
-    if(this.roomz.length<1) {
-      this.totalSum = null
+    if (this.roomz.length < 1) {
+      this.totalSum = null;
     } else {
       this.totalSum -= roomTotal;
     }
@@ -145,14 +145,30 @@ export class IntPaintEstimateComponent implements OnInit {
     this.roomDetailsForm.controls['length'].setValue(room.length);
     this.roomDetailsForm.controls['width'].setValue(room.width);
     this.roomDetailsForm.controls['height'].setValue(room.height);
-    this.roomDetailsForm.controls['conditionPicked'].setValue(room.conditionPicked);
-    this.roomDetailsForm.controls['roomFeaturesForm'].get('walls')?.setValue(room.walls);
-    this.roomDetailsForm.controls['roomFeaturesForm'].get('ceiling')?.setValue(room.ceiling);
-    this.roomDetailsForm.controls['roomFeaturesForm'].get('trim')?.setValue(room.trim);
-    this.roomDetailsForm.controls['roomFeaturesForm'].get('windows')?.setValue(room.windows);
-    this.roomDetailsForm.controls['roomFeaturesForm'].get('doors')?.setValue(room.doors);
-    this.roomDetailsForm.controls['roomFeaturesForm'].get('windowsQuantity')?.setValue(room.windowsQuantity);
-    this.roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')?.setValue(room.doorsQuantity);
+    this.roomDetailsForm.controls['conditionPicked'].setValue(
+      room.conditionPicked
+    );
+    this.roomDetailsForm.controls['roomFeaturesForm']
+      .get('walls')
+      ?.setValue(room.walls);
+    this.roomDetailsForm.controls['roomFeaturesForm']
+      .get('ceiling')
+      ?.setValue(room.ceiling);
+    this.roomDetailsForm.controls['roomFeaturesForm']
+      .get('trim')
+      ?.setValue(room.trim);
+    this.roomDetailsForm.controls['roomFeaturesForm']
+      .get('windows')
+      ?.setValue(room.windows);
+    this.roomDetailsForm.controls['roomFeaturesForm']
+      .get('doors')
+      ?.setValue(room.doors);
+    this.roomDetailsForm.controls['roomFeaturesForm']
+      .get('windowsQuantity')
+      ?.setValue(room.windowsQuantity);
+    this.roomDetailsForm.controls['roomFeaturesForm']
+      .get('doorsQuantity')
+      ?.setValue(room.doorsQuantity);
 
     this.visible = true;
     this.layoutsToggle = false;
@@ -173,7 +189,7 @@ export class IntPaintEstimateComponent implements OnInit {
   }
 
   calculate() {
-    this.totalSum = this.calculatorService.calculateRoomz(this.roomz)
+    this.totalSum = this.calculatorService.calculateRoomz(this.roomz);
     //add current room value when form is valid: will also show warning if form is invalid
     //possibly make totalSum dynamic so they alwayse see the running total
     //and turn calculate button into Build Report, with detailed view of costs
@@ -183,11 +199,11 @@ export class IntPaintEstimateComponent implements OnInit {
     return Math.round(val);
   }
 
-  imageSelected(L:number, W:number, H:number): number {
+  imageSelected(L: number, W: number, H: number): number {
     this.roomDetailsForm.controls['length'].setValue(L);
     this.roomDetailsForm.controls['width'].setValue(W);
     this.roomDetailsForm.controls['height'].setValue(H);
 
-    return Math.round(L*W*H);
+    return Math.round(L * W * H);
   }
 }
