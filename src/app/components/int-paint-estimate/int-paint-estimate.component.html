@@ -117,26 +117,46 @@
           <button (click)="layoutsToggle = !layoutsToggle">Hide</button>
         </div>
       </div>
-      <!--
+
       <div *ngIf="layoutsToggle">
         <div *ngFor="let swiper_comp of roomLayouts">
-          <div class="swipers-container" *ngIf="swiper_comp.name == roomDetailsForm.get('roomPicked')?.value">
-            <swiper #swiper class='swiper' [config]="config">
-              <ng-template *ngFor="let picture of swiper_comp.pictures" swiperSlide> 
-                <span>{{Round(picture.L * picture.W)}} sq. ft.</span>
-                <input #radioButton name="length" type="radio" id="cb{{picture.picture}}" [(ngModel)] = "selectedImage" [ngModelOptions]="{standalone: true}" [value]="[picture.L, picture.W, picture.H]" (click)="imageSelected(picture.L, picture.W, picture.H)" [checked]=false/>
-                <label for="cb{{picture.picture}}"> <img class="swiper-pic" src={{picture.picture}}> </label>
-              </ng-template>
-            </swiper>
+          <div
+            class="swipers-container"
+            *ngIf="swiper_comp.name == roomDetailsForm.get('roomPicked')?.value"
+          >
+            <swiper-container
+              class="swiper"
+              navigation="true"
+              pagination="true"
+              pagination-type="fraction"
+            >
+              <swiper-slide *ngFor="let picture of swiper_comp.pictures">
+                <span>{{ Round(picture.L * picture.W) }} sq. ft.</span>
+                <input
+                  #radioButton
+                  name="length"
+                  type="radio"
+                  id="cb{{ picture.picture }}"
+                  [(ngModel)]="selectedImage"
+                  [ngModelOptions]="{ standalone: true }"
+                  [value]="[picture.L, picture.W, picture.H]"
+                  (click)="imageSelected(picture.L, picture.W, picture.H)"
+                  [checked]="false"
+                />
+                <label for="cb{{ picture.picture }}">
+                  <img class="swiper-pic" src="{{ picture.picture }}" />
+                </label>
+              </swiper-slide>
+            </swiper-container>
           </div>
         </div>
-
+        <!--
         <div class="swiper-navigation" *ngIf="roomDetailsForm.get('roomPicked')?.value">
           <button class="swiper-button before" (click)="slidePrev()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z"/></svg> </button>
           <button class="swiper-button next" (click)="slideNext()"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg> </button>
-        </div>
+        </div>-->
       </div>
-    -->
+
       <div
         class="center-text"
         *ngIf="!layoutsToggle"
@@ -303,7 +323,7 @@
   <div style="display: flex; justify-content: center">
     <h2 style="display: inline">Your Rooms:</h2>
   </div>
-  <!--
+
   <mat-chip-list #chipList aria-label="Fruit selection">
     <h3 style="display: inline" *ngIf="roomz.length < 1"><i>Empty</i></h3>
     <mat-chip
@@ -311,14 +331,16 @@
       (removed)="remove(room)"
       (click)="edit(room)"
     >
-      <mat-icon>edit</mat-icon>
-      - {{ room.customName }} -
-      <button matChipRemove>
-        <mat-icon>cancel</mat-icon>
-      </button>
+      <div class="chip-content">
+        <mat-icon>edit</mat-icon>
+        - {{ room.customName }} -
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
     </mat-chip>
   </mat-chip-list>
--->
+
   <div class="bottom-bar" style="justify-content: center">
     <button class="calc-button" mat-raised-button (click)="calculate()">
       Generate Report
