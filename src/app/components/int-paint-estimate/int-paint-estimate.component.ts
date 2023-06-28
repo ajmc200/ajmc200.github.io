@@ -15,7 +15,7 @@ import { InteriorCalculatorService } from '../../services/calculate/interior-cal
 @Component({
   selector: 'app-int-paint-estimate',
   templateUrl: './int-paint-estimate.component.html',
-  styleUrls: ['./int-paint-estimate.component.css'],
+  styleUrls: ['./int-paint-estimate.component.scss'],
 })
 export class IntPaintEstimateComponent implements OnInit {
   roomLayouts = ROOMLAYOUTS;
@@ -30,6 +30,7 @@ export class IntPaintEstimateComponent implements OnInit {
     new InteriorCalculatorService();
   totalSum: any = null;
   selectedImage!: number[];
+  length!: any;
 
   constructor(private fb: UntypedFormBuilder) {}
 
@@ -200,6 +201,7 @@ export class IntPaintEstimateComponent implements OnInit {
   }
 
   imageSelected(L: number, W: number, H: number): number {
+    console.log(this.selectedImage);
     this.roomDetailsForm.controls['length'].setValue(L);
     this.roomDetailsForm.controls['width'].setValue(W);
     this.roomDetailsForm.controls['height'].setValue(H);

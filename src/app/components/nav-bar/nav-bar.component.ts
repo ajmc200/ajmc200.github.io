@@ -4,7 +4,7 @@ import { trigger, state, style, animate, transition, } from '@angular/animations
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css'],
+  styleUrls: ['./nav-bar.component.scss'],
   animations: [
     trigger('openClose', [
       state('open', style({
