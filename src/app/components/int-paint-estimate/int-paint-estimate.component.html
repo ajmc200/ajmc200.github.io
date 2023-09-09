@@ -311,6 +311,15 @@
           Done
         </button>
         <button
+          *ngIf="
+            roomDetailsForm.controls['roomFeaturesForm'].get('doorsQuantity')
+              ?.value == 69
+          "
+          (click)="testapi()"
+        >
+          test
+        </button>
+        <button
           mat-raised-button
           (click)="!(visible = false); roomDetailsForm.reset()"
         >

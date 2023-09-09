@@ -11,6 +11,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ROOMLAYOUTS } from 'src/app/services/room-layouts';
 import { Room } from '../../services/room';
 import { InteriorCalculatorService } from '../../services/calculate/interior-calculator.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-int-paint-estimate',
@@ -32,7 +33,7 @@ export class IntPaintEstimateComponent implements OnInit {
   selectedImage!: number[];
   length!: any;
 
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: UntypedFormBuilder, private apiService: ApiService) {}
 
   roomDetailsForm = this.fb.group({
     customName: [''],
@@ -207,5 +208,12 @@ export class IntPaintEstimateComponent implements OnInit {
     this.roomDetailsForm.controls['height'].setValue(H);
 
     return Math.round(L * W * H);
+  }
+
+  testapi() {
+    console.log('Oh boy here we go:  ');
+    this.apiService.getTestData().subscribe((data) => {
+      console.log(data); // Handle the API response here
+    });
   }
 }
