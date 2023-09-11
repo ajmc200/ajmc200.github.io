@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
   //rootURL: String = 'http://localhost:8090/test'
   rootURL: String =
-    'http://ec2-18-223-107-127.us-east-2.compute.amazonaws.com:8090'; // Replace with your API URL
+    'https://ec2-3-19-167-124.us-east-2.compute.amazonaws.com:8090'; // Replace with your API URL
 
   constructor(private http: HttpClient) {}
 
