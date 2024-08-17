@@ -1,57 +1,63 @@
-*{
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
+* {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 
 p {
-    font-size: 1.3125rem;
-    line-height: 1.5;
+  font-size: 1.3125rem;
+  line-height: 1.5;
 }
 
 section {
-    padding-top: 0.5rem;
-    padding-bottom: 3rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .grid {
-    margin-inline: auto;
-    margin-top: 50px;
-    width: min(90%, 70.5rem);
-    font-size: 1.3125rem;
+  margin-inline: auto;
+  margin-top: 50px;
+  width: min(90%, 70.5rem);
+  font-size: 1.3125rem;
 }
 
 h1 {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .section-header {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 hr.solid {
-    border-top: 3px solid #bbb;
+  border-top: 3px solid #bbb;
 }
 
 .swipers-container {
-    margin-inline: auto;
-    width: min(90%, 50.5rem);
+  margin-inline: auto;
+  width: min(90%, 50.5rem);
 }
 
-.tall{
-    width: min(90%, 20.5rem);
+.container {
+  width: 60%;
+  overflow: hidden;
 }
 
-.swiper {
-    margin-bottom: 1rem;
+.tall {
+  width: min(90%, 20.5rem);
+  overflow: visible;
+}
+
+.swiper-element {
+  margin-bottom: 1rem;
 }
 
 .swiper-pic {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }

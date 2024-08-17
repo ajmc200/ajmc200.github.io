@@ -4,7 +4,7 @@
       <h1 class="section-header">Gallery</h1>
       <hr class="solid" />
       <div class="swipers-container">
-        <swiper-container class="swiper">
+        <swiper-container class="swiper-element">
           <swiper-slide
             ><img
               class="swiper-pic"
@@ -36,7 +36,9 @@
               src="../../../assets/gallery-images/after3.jpg"
           /></swiper-slide>
         </swiper-container>
-        <swiper-container class="swiper">
+      </div>
+      <div class="swipers-container">
+        <swiper-container class="swiper-element">
           <swiper-slide
             ><img
               class="swiper-pic"
@@ -68,10 +70,20 @@
               src="../../../assets/gallery-images/room1-6.jpg"
           /></swiper-slide>
         </swiper-container>
+      </div>
+      <div class="container">
         <swiper-container
-          class="swiper tall"
-          navigation="true"
+          class="swiper-element tall"
           pagination="true"
+          effect="coverflow"
+          grab-cursor="true"
+          centered-slides="true"
+          slides-per-view="auto"
+          coverflow-effect-rotate="50"
+          coverflow-effect-stretch="0"
+          coverflow-effect-depth="100"
+          coverflow-effect-modifier="1"
+          coverflow-effect-slide-shadows="true"
         >
           <swiper-slide
             ><img
